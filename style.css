@@ -459,6 +459,92 @@ states-grid::-webkit-scrollbar {
 }
 
 
+/* ================= local insights page ================= */
+
+#community-tips {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(160,166,74,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+#community-tips h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+#community-tips form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#community-tips textarea,
+#community-tips select,
+#community-tips button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 1rem;
+}
+
+#community-tips button {
+  background-color: #a0a64a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#community-tips button:hover {
+  background-color: #f4978e;
+}
+
+#tipsList {
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tip-card {
+  padding: 12px 15px;
+  border-radius: 15px;
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.tip-card button.delete-btn {
+  background: #f4978e;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.tip-card button.delete-btn:hover {
+  background: #e06b5a;
+}
+
+#filterCategory {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
 /* ================= Footer ================= */
 .site-footer {
   display: flex;

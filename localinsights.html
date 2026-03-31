@@ -33,7 +33,7 @@
                 <textarea
                     id="userTip"
                     rows="4"
-                    placeholder="Example: Traffic on 91 starts building around 3:00 PM..."
+                    placeholder="Example: Traffic on 91 starts building around 3:00 PM on weekdays..."
                     ></textarea><br><br>
 
                     <label for="tipCategory">Category</label>
@@ -49,6 +49,17 @@
             </form>
 
             <p id="submitMessage" style="color: black; display: none;">Tip submitted successfully!</p>
+
+            <!-- Optional filter -->
+            <label for="filterCategory">Filter by category:</label>
+                <select id="filterCategory">
+                    <option value="All">All</option>
+                    <option value="general">General</option>
+                    <option value="traffic">Traffic</option>
+                    <option value="schools">Schools</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="community">Community</option>
+                </select>
 
             <ul id="tipsList"></ul>
         </section>
@@ -72,7 +83,8 @@
         <a href="faq.html">FAQ</a>
     </div>
 </footer>
-    
+
+<script src="index.js"></script>
     
 </body>
 </html>
