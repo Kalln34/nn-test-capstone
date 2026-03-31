@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { name: "Stamford", img: "Images/stamfordct.png" },
       { name: "Danbury", img: "Images/danburyct.png" },
       { name: "Norwalk", img: "Images/norwalkct.png" },
-      { name: "Bridgeport", img: "Images/bridgeport.jpg" },
+      { name: "Bridgeport", img: "Images/bridgeportct.png" },
       { name: "New Britain", img: "Images/newbritainct.png" },
       { name: "New London", img: "Images/newlondonct.png" }
     ],
