@@ -162,3 +162,80 @@ document.addEventListener("DOMContentLoaded", () => {
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+// Local Insights Page
+
+(function() {
+  const tipForm = document.getElementById("tipForm");
+  if (!tipForm) return;
+
+  const userTipInput = document.getElementById("userTip");
+  const tipCategory = document.getElementById("tipCategory");
+  const tipsList = document.getElementById("tipsList");
+  const submitMessage = document.getElementById("submitMessage");
+  const filterCategory = document.getElementById("filterCategory");
+
+  // Load saved tips from localStorage
+  const savedTips = JSON.parse(localStorage.getItem("communityTips") || "[]");
+
+  function renderTips(filter = "All") {
+    tipsList.innerHTML = "";
+    savedTips.forEach((tip, index) => {
+      if (filter !== "All" && tip.category !== filter) return;
+
+      const li = document.createElement("li");
+      li.className = "tip-card";
+
+      li.innerHTML = `
+        <strong>${tip.category}</strong><br>
+        <p>${tip.text}</p>
+        <button class="delete-btn" data-index="${index}">Delete</button>
+      `;
+      tipsList.appendChild(li);
+    });
+  }
+
+  // Initial render
+  renderTips();
+
+  // Form submission
+  tipForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const tipText = userTipInput.value.trim();
+    const category = tipCategory.value.toLowerCase();
+
+    if (!tipText) {
+      alert("Please enter a tip before submitting");
+      return;
+    }
+
+    const newTip = { text: tipText, category };
+    savedTips.push(newTip);
+    localStorage.setItem("communityTips", JSON.stringify(savedTips));
+
+    renderTips(filterCategory?.value || "All");
+    userTipInput.value = "";
+    tipCategory.value = "general";
+
+    if (submitMessage) {
+      submitMessage.style.display = "block";
+      setTimeout(() => { submitMessage.style.display = "none"; }, 2000);
+    }
+  });
+
+  // Delete tip
+  tipsList.addEventListener("click", function(event) {
+    if (event.target.classList.contains("delete-btn")) {
+      const index = event.target.dataset.index;
+      savedTips.splice(index, 1);
+      localStorage.setItem("communityTips", JSON.stringify(savedTips));
+      renderTips(filterCategory?.value || "All");
+    }
+  });
+
+  // Filter tips
+  filterCategory?.addEventListener("change", function() {
+    renderTips(filterCategory.value);
+    });
+
+})();
