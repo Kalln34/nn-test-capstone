@@ -547,7 +547,7 @@ states-grid::-webkit-scrollbar {
 
 /* ================= about page ================= */
 
-.hero {
+.hero-about {
     position: relative;
     height: 40vh;
     display: flex;
@@ -558,7 +558,7 @@ states-grid::-webkit-scrollbar {
     text-align: center;
 }
 
-.hero::after {
+.hero-about::after {
     content: "";
     position: absolute;
     top:0; left:0;
@@ -567,7 +567,7 @@ states-grid::-webkit-scrollbar {
     background: rgba(0,0,0,0.4); /* overlay for contrast */
 }
 
-.hero h1 {
+.hero-about h1 {
     position: relative;
     z-index: 1;
     font-size: 3rem;
