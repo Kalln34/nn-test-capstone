@@ -630,6 +630,140 @@ states-grid::-webkit-scrollbar {
     transition: all 0.3s ease;
 }
 
+/* ================= Profile Container ================= */
+.profile-container {
+    max-width: 1200px;
+    margin: 100px auto 60px auto; /* push below nav */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background: rgba(255,255,255,0.1); /* frosted container */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* ================= Profile Header ================= */
+.profile-header {
+    text-align: center;
+}
+
+.profile-header h1 {
+    font-size: 2.5rem;
+    color: #a0a64a;
+    margin-bottom: 10px;
+}
+
+.profile-header p {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* ================= Profile Stats ================= */
+.profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: rgba(160,166,74,0.2);
+    border-radius: 15px;
+    padding: 20px 30px;
+    min-width: 150px;
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    background: rgba(160,166,74,0.35);
+    transform: translateY(-3px);
+}
+
+/* Stat text */
+.stat-card p {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+}
+
+.stat-card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* ================= Quick Actions ================= */
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
+
+.quick-actions h2 {
+    font-size: 1.8rem;
+    color: #a0a64a;
+    margin-bottom: 10px;
+}
+
+.quick-actions button {
+    padding: 12px 25px;
+    background: #a0a64a;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 220px;
+}
+
+.quick-actions button:hover {
+    background: #f4978e;
+    transform: translateY(-2px);
+}
+
+/* ================= Saved Locations ================= */
+.saved-section h2 {
+    font-size: 1.8rem;
+    color: #a0a64a;
+    margin-bottom: 15px;
+}
+
+#savedLocationsList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+/* Individual saved location card */
+.saved-card {
+    background: rgba(160,166,74,0.2);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    font-weight: 500;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.saved-card:hover {
+    background: rgba(160,166,74,0.35);
+    transform: translateY(-3px);
+}
+
+
 /* ================= Footer ================= */
 .site-footer {
   display: flex;
@@ -750,6 +884,23 @@ states-grid::-webkit-scrollbar {
     .nav-links {
         flex-direction: column;
         gap: 8px;
+    }
+
+    .profile-header h1 {
+        font-size: 2rem;
+    }
+
+    .profile-header p {
+        font-size: 1rem;
+    }
+
+    .profile-stats {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quick-actions button {
+        min-width: 180px;
     }
 }
 
