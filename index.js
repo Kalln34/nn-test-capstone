@@ -158,6 +158,56 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+
+// =================== CITY PAGE ===================
+if (document.getElementById("cityTitle")) {
+
+  const params = new URLSearchParams(window.location.search);
+  const cityName = params.get("city") || "City";
+
+  // Format title nicely
+  const formattedCity = cityName
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, str => str.toUpperCase());
+
+  document.title = `Neighborhood Navigator - ${formattedCity}`;
+  document.getElementById("cityTitle").textContent = formattedCity;
+
+  // Categories
+  const categories = [
+    "Education",
+    "Healthcare",
+    "Public Transportation",
+    "Jobs",
+    "Government Resources",
+    "Community Resources"
+  ];
+
+  const grid = document.getElementById("categoryGrid");
+
+  categories.forEach((cat, i) => {
+    const card = document.createElement("a");
+    card.href = `category.html?city=${cityName}&category=${cat.toLowerCase().replace(/\s+/g,'')}`;
+    card.className = "state-card";
+    card.textContent = cat;
+
+    card.style.animation = `fadeInCard 0.5s forwards`;
+    card.style.animationDelay = `${i * 0.1}s`;
+
+    grid.appendChild(card);
+  });
+
+  // Breadcrumb
+  const breadcrumb = document.getElementById("cityBreadcrumb");
+  if (breadcrumb) {
+    breadcrumb.innerHTML = `
+      <a href="explore.html">Explore</a> > 
+      <a href="javascript:history.back()">State</a> > 
+      <span>${formattedCity}</span>
+    `;
+  }
+}
+
 // Capitalize helper
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
