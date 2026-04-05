@@ -12,11 +12,27 @@ function animateCards(cards) {
   });
 }
 
+// =================== CATEGORY LABELS ===================
+const categoryLabels = {
+  education: "Education",
+  healthcare: "Healthcare",
+  publictransportation: "Public Transportation",
+  employment: "Employment",
+  governmentresources: "Government Resources",
+  communityresources: "Community Resources"
+};
+
+
+
+// =================== MAIN SCRIPT ===================
+document.addEventListener("DOMContentLoaded", () => {
+
+
 // =================== EXPLORE PAGE ===================
-if (document.getElementById('stateSearch')) {
-  const searchInput = document.getElementById('stateSearch');
-  const cards = document.querySelectorAll('.state-card');
-  const grid = document.querySelector('.states-grid');
+if (searchInput) {
+    const cards = document.querySelectorAll('.state-card');
+    const grid = document.querySelector('.states-grid');
+
 
   // "No results" message
   const noResults = document.createElement('p');
@@ -58,15 +74,16 @@ if (document.getElementById('stateSearch')) {
 }
 
 // =================== STATE PAGE ===================
-document.addEventListener("DOMContentLoaded", () => {
-  // --- Get selected state from URL ---
+const stateTitle = document.getElementById("stateTitle");
+
+  if (stateTitle) {
   const params = new URLSearchParams(window.location.search);
   const stateName = params.get("state") || "Explore";
 
   // --- Update title and heading ---
   document.title = `Neighborhood Navigator - ${capitalize(stateName)}`;
-  const heading = document.getElementById("stateTitle");
-  if (heading) heading.textContent = capitalize(stateName);
+  stateTitle.textContent = capitalize(stateName);
+
 
   // --- Sidebar ---
   const states = [
@@ -79,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const sidebar = document.getElementById("stateSidebar");
+  if (sidebar) {
   sidebar.innerHTML = ""; // clear any existing items
 
   states.forEach(state => {
@@ -87,11 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
     a.href = `state.html?state=${state.toLowerCase()}`;
     a.textContent = state;
 
-    if (state.toLowerCase() === stateName.toLowerCase()) a.classList.add("active");
+    if (state.toLowerCase() === stateName.toLowerCase()) {
+      a.classList.add("active");
+  }
 
     li.appendChild(a);
     sidebar.appendChild(li);
   });
+}
 
   // --- Cities / Neighborhoods ---
   const stateCities = {
@@ -126,23 +147,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // Display cities
-  grid.innerHTML = "";
   cities.forEach((city, i) => {
-    const card = document.createElement("a");
-    card.href = `city.html?city=${city.name.toLowerCase().replace(/\s+/g,'')}`;
-    card.className = "state-card";
+        const card = document.createElement("a");
+        const cityKey = city.name.toLowerCase().replace(/\s+/g,'');
+
+        card.href = `city.html?city=${cityKey}`;
+        card.className = "state-card";
 
     // Add city image
     const img = document.createElement("img");
     img.src = city.img;
     img.alt = city.name;
-    card.appendChild(img);
 
     // Add city name
     const name = document.createElement("span");
     name.textContent = city.name;
-    card.appendChild(name);
 
+    card.appendChild(img);
+    card.appendChild(name);
 
     // Fade-in animation
     card.style.animation = `fadeInCard 0.5s forwards`;
@@ -150,6 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     grid.appendChild(card);
   });
+}
 
   // --- Breadcrumb ---
   const breadcrumb = document.getElementById("breadcrumbTrail");
@@ -160,42 +183,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // =================== CITY PAGE ===================
-if (document.getElementById("cityTitle")) {
+const cityTitle = document.getElementById("cityTitle");
 
+if (cityTitle) {  
   const params = new URLSearchParams(window.location.search);
   const cityName = params.get("city") || "City";
 
-  // Format title nicely
-  const formattedCity = cityName
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, str => str.toUpperCase());
+  // Format title
+  const formattedCity = capitalize(cityName);
 
-  document.title = `Neighborhood Navigator - ${formattedCity}`;
-  document.getElementById("cityTitle").textContent = formattedCity;
+    document.title = `Neighborhood Navigator - ${formattedCity}`;
+    cityTitle.textContent = formattedCity;
 
-  // Categories
-  const categories = [
-    "Education",
-    "Healthcare",
-    "Public Transportation",
-    "Jobs",
-    "Government Resources",
-    "Community Resources"
-  ];
+    const categories = Object.keys(categoryLabels);
+    const grid = document.getElementById("categoryGrid");
 
-  const grid = document.getElementById("categoryGrid");
+    if (grid) {
+      categories.forEach((key, i) => {
+        const card = document.createElement("a");
 
-  categories.forEach((cat, i) => {
-    const card = document.createElement("a");
-    card.href = `category.html?city=${cityName}&category=${cat.toLowerCase().replace(/\s+/g,'')}`;
-    card.className = "state-card";
-    card.textContent = cat;
+        card.href = `category.html?city=${cityName}&category=${key}`;
+        card.className = "state-card";
+        card.textContent = categoryLabels[key];
 
-    card.style.animation = `fadeInCard 0.5s forwards`;
-    card.style.animationDelay = `${i * 0.1}s`;
+        card.style.animation = `fadeInCard 0.5s forwards`;
+        card.style.animationDelay = `${i * 0.1}s`;
 
-    grid.appendChild(card);
-  });
+        grid.appendChild(card);
+      });
+    }
 
   // Breadcrumb
   const breadcrumb = document.getElementById("cityBreadcrumb");
@@ -209,28 +225,26 @@ if (document.getElementById("cityTitle")) {
 }
 
 // =================== CATEGORY PAGE ===================
-if (document.getElementById("categoryTitle")) {
+const categoryTitle = document.getElementById("categoryTitle");
 
+ if (categoryTitle) {
   const params = new URLSearchParams(window.location.search);
   const city = params.get("city");
   const category = params.get("category");
 
-  const format = str =>
-    str.replace(/([A-Z])/g, ' $1')
-       .replace(/^./, s => s.toUpperCase());
 
-  const formattedCity = format(city);
-  const formattedCategory = format(category);
+  const formattedCity = capitalize(city);
+    const formattedCategory = categoryLabels[category] || category;
 
-  document.getElementById("categoryTitle").textContent =
-    `${formattedCategory} in ${formattedCity}`;
+    categoryTitle.textContent = `${formattedCategory} in ${formattedCity}`;
 
-  // Example content (expand later)
-  const content = document.getElementById("categoryContent");
+    const content = document.getElementById("categoryContent");
 
-  content.innerHTML = `
-    <p>Here you will find information about <strong>${formattedCategory}</strong> in ${formattedCity}.</p>
-  `;
+    if (content) {
+      content.innerHTML = `
+        <p>Here you will find information about <strong>${formattedCategory}</strong> in ${formattedCity}.</p>
+      `;
+    }
 
   // Breadcrumb
   document.getElementById("categoryBreadcrumb").innerHTML = `
@@ -238,12 +252,6 @@ if (document.getElementById("categoryTitle")) {
     <a href="javascript:history.back()">${formattedCity}</a> >
     <span>${formattedCategory}</span>
   `;
-}
-
-
-// Capitalize helper
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // Local Insights Page
