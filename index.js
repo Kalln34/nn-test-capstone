@@ -208,6 +208,39 @@ if (document.getElementById("cityTitle")) {
   }
 }
 
+// =================== CATEGORY PAGE ===================
+if (document.getElementById("categoryTitle")) {
+
+  const params = new URLSearchParams(window.location.search);
+  const city = params.get("city");
+  const category = params.get("category");
+
+  const format = str =>
+    str.replace(/([A-Z])/g, ' $1')
+       .replace(/^./, s => s.toUpperCase());
+
+  const formattedCity = format(city);
+  const formattedCategory = format(category);
+
+  document.getElementById("categoryTitle").textContent =
+    `${formattedCategory} in ${formattedCity}`;
+
+  // Example content (expand later)
+  const content = document.getElementById("categoryContent");
+
+  content.innerHTML = `
+    <p>Here you will find information about <strong>${formattedCategory}</strong> in ${formattedCity}.</p>
+  `;
+
+  // Breadcrumb
+  document.getElementById("categoryBreadcrumb").innerHTML = `
+    <a href="explore.html">Explore</a> >
+    <a href="javascript:history.back()">${formattedCity}</a> >
+    <span>${formattedCategory}</span>
+  `;
+}
+
+
 // Capitalize helper
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
