@@ -12,6 +12,37 @@ function animateCards(cards) {
   });
 }
 
+// Reusable function to create cards in a grid
+function createCards(grid, items, hrefCallback, textCallback, imgCallback) {
+  if (!grid || !items) return;
+  grid.innerHTML = "";
+  const cards = items.map((item, i) => {
+    const card = document.createElement("a");
+    card.className = "state-card";
+    card.href = hrefCallback(item);
+
+    if (imgCallback) {
+      const img = document.createElement("img");
+      img.src = imgCallback(item);
+      img.alt = textCallback(item);
+      card.appendChild(img);
+    }
+
+    const name = document.createElement("span");
+    name.textContent = textCallback(item);
+    card.appendChild(name);
+
+    card.style.animation = `fadeInCard 0.5s forwards`;
+    card.style.animationDelay = `${i * 0.1}s`;
+
+    grid.appendChild(card);
+    return card;
+  });
+
+  animateCards(cards);
+}
+
+
 // =================== CATEGORY LABELS ===================
 const categoryLabels = {
   education: "Education",
@@ -29,9 +60,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // =================== EXPLORE PAGE ===================
-if (searchInput) {
-    const cards = document.querySelectorAll('.state-card');
-    const grid = document.querySelector('.states-grid');
+const searchInput = document.getElementById('stateSearch');
+
+const grid = document.querySelector('.states-grid');
+
+  if (searchInput && grid) {
+    const states = Array.from(document.querySelectorAll('.state-card')).map(card => ({
+      name: card.textContent,
+      href: card.href
+    }));
 
 
   // "No results" message
@@ -47,28 +84,21 @@ if (searchInput) {
 
   function filterStates() {
     const filter = searchInput.value.toLowerCase();
-    let anyVisible = false;
-    const visibleCards = [];
+      const filtered = states.filter(state => state.name.toLowerCase().includes(filter));
+      noResults.style.display = filtered.length === 0 ? 'block' : 'none';
 
-    cards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(filter)) {
-        card.style.display = "flex";
-        visibleCards.push(card);
-        anyVisible = true;
-      } else {
-        card.style.display = "none";
-        card.style.animation = ""; // reset
-      }
-    });
+      createCards(
+        grid,
+        filtered,
+        state => state.href,
+        state => state.name
+      );
+    }
 
-    animateCards(visibleCards);
-    noResults.style.display = anyVisible ? 'none' : 'block';
-  }
+    // Render all cards initially
+    createCards(grid, states, state => state.href, state => state.name);
 
-  // Animate all cards on page load
-  animateCards(Array.from(cards));
-
+  
   // Filter on input
   searchInput.addEventListener('input', filterStates);
 }
@@ -143,43 +173,17 @@ const stateTitle = document.getElementById("stateTitle");
     { name: "City 4", img: "Images/cities/default.jpg" },
     { name: "City 5", img: "Images/cities/default.jpg" }
   ];
-  const grid = document.getElementById("stateCardsGrid");
+  const cityGrid = document.getElementById("stateCardsGrid");
+    createCards(cityGrid, cities, city => `city.html?city=${city.name.toLowerCase().replace(/\s+/g,'')}`, city => city.name, city => city.img);
 
-
-  // Display cities
-  cities.forEach((city, i) => {
-        const card = document.createElement("a");
-        const cityKey = city.name.toLowerCase().replace(/\s+/g,'');
-
-        card.href = `city.html?city=${cityKey}`;
-        card.className = "state-card";
-
-    // Add city image
-    const img = document.createElement("img");
-    img.src = city.img;
-    img.alt = city.name;
-
-    // Add city name
-    const name = document.createElement("span");
-    name.textContent = city.name;
-
-    card.appendChild(img);
-    card.appendChild(name);
-
-    // Fade-in animation
-    card.style.animation = `fadeInCard 0.5s forwards`;
-    card.style.animationDelay = `${i * 0.1}s`;
-
-    grid.appendChild(card);
-  });
-}
 
   // --- Breadcrumb ---
   const breadcrumb = document.getElementById("breadcrumbTrail");
-  if (breadcrumb) {
-    breadcrumb.innerHTML = `<a href="explore.html" style="color:white;text-decoration:underline;">Explore</a> &gt; <span>${capitalize(stateName)}</span>`;
+    if (breadcrumb) {
+      breadcrumb.innerHTML = `<a href="explore.html" style="color:white;text-decoration:underline;">Explore</a> &gt; <span>${capitalize(stateName)}</span>`;
+    }
   }
-});
+
 
 
 // =================== CITY PAGE ===================
@@ -187,42 +191,35 @@ const cityTitle = document.getElementById("cityTitle");
 
 if (cityTitle) {  
   const params = new URLSearchParams(window.location.search);
-  const cityName = params.get("city") || "City";
+  const cityName = params.get("city");
+  if (!cityName) return;
 
-  // Format title
-  const formattedCity = capitalize(cityName);
+  // Better formatting
+  const formattedCity = cityName
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
 
-    document.title = `Neighborhood Navigator - ${formattedCity}`;
-    cityTitle.textContent = formattedCity;
+  document.title = `Neighborhood Navigator - ${formattedCity}`;
+  cityTitle.textContent = formattedCity;
 
-    const categories = Object.keys(categoryLabels);
-    const grid = document.getElementById("categoryGrid");
+  const categories = Object.keys(categoryLabels);
+  const grid = document.getElementById("categoryGrid");
 
-    if (grid) {
-      categories.forEach((key, i) => {
-        const card = document.createElement("a");
-
-        card.href = `category.html?city=${cityName}&category=${key}`;
-        card.className = "state-card";
-        card.textContent = categoryLabels[key];
-
-        card.style.animation = `fadeInCard 0.5s forwards`;
-        card.style.animationDelay = `${i * 0.1}s`;
-
-        grid.appendChild(card);
-      });
+  if (grid) {
+      createCards(grid, categories, key => `category.html?city=${cityName}&category=${key}`, key => categoryLabels[key]);
     }
 
-  // Breadcrumb
-  const breadcrumb = document.getElementById("cityBreadcrumb");
-  if (breadcrumb) {
-    breadcrumb.innerHTML = `
-      <a href="explore.html">Explore</a> > 
-      <a href="javascript:history.back()">State</a> > 
-      <span>${formattedCity}</span>
-    `;
+    const breadcrumb = document.getElementById("cityBreadcrumb");
+    if (breadcrumb) {
+      breadcrumb.innerHTML = `
+        <a href="explore.html">Explore</a> &gt; 
+        <a href="javascript:history.back()">State</a> &gt; 
+        <span>${formattedCity}</span>
+      `;
+    }
   }
-}
+
 
 // =================== CATEGORY PAGE ===================
 const categoryTitle = document.getElementById("categoryTitle");
@@ -247,12 +244,15 @@ const categoryTitle = document.getElementById("categoryTitle");
     }
 
   // Breadcrumb
-  document.getElementById("categoryBreadcrumb").innerHTML = `
-    <a href="explore.html">Explore</a> >
-    <a href="javascript:history.back()">${formattedCity}</a> >
-    <span>${formattedCategory}</span>
-  `;
-}
+  const breadcrumb = document.getElementById("categoryBreadcrumb");
+    if (breadcrumb) {
+      breadcrumb.innerHTML = `
+        <a href="explore.html">Explore</a> &gt;
+        <a href="javascript:history.back()">${formattedCity}</a> &gt;
+        <span>${formattedCategory}</span>
+      `;
+    }
+  }
 
 // Local Insights Page
 
@@ -299,20 +299,13 @@ const categoryTitle = document.getElementById("categoryTitle");
       alert("Please enter a tip before submitting");
       return;
     }
-
-    const newTip = { text: tipText, category };
-    savedTips.push(newTip);
-    localStorage.setItem("communityTips", JSON.stringify(savedTips));
-
-    renderTips(filterCategory?.value || "All");
-    userTipInput.value = "";
-    tipCategory.value = "general";
-
-    if (submitMessage) {
-      submitMessage.style.display = "block";
-      setTimeout(() => { submitMessage.style.display = "none"; }, 2000);
-    }
-  });
+    savedTips.push({ text: tipText, category });
+      localStorage.setItem("communityTips", JSON.stringify(savedTips));
+      renderTips(filterCategory?.value || "All");
+      userTipInput.value = "";
+      tipCategory.value = "general";
+      if (submitMessage) { submitMessage.style.display = "block"; setTimeout(() => { submitMessage.style.display = "none"; }, 2000); }
+    });
 
   // Delete tip
   tipsList.addEventListener("click", function(event) {
@@ -330,3 +323,5 @@ const categoryTitle = document.getElementById("categoryTitle");
     });
 
 })();
+
+});
