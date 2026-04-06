@@ -59,28 +59,28 @@ const categoryLabels = {
 const cityCategoryImages = {
   hartford: {
     education: [
-      { name: "Public Schools", img: "Images/hartford/schools.png" },
+      { name: "Public Schools", img: "Images/Connecticut/hartfordctschools.png" },
       { name: "Universities", img: "Images/hartford/universities.png" }
     ],
     healthcare: [
-      { name: "Hospitals", img: "Images/hartford/hospitals.png" },
+      { name: "Hospitals", img: "Images/Connecticut/hartfordhospital.png" },
       { name: "Clinics", img: "Images/hartford/clinics.png" }
     ],
     publictransportation: [
-      { name: "Bus Lines", img: "Images/hartford/bus.png" },
+      { name: "Bus Lines", img: "Images/Connecticut/CTtransportation.png" },
       { name: "Train Stations", img: "Images/hartford/train.png" }
     ],
     employment: [
-      { name: "Bus Lines", img: "Images/hartford/bus.png" },
-      { name: "Train Stations", img: "Images/hartford/train.png" }
+      { name: "Resources", img: "Images/hartford/bus.png" },
+      { name: "Companies in Connecticut", img: "Images/hartford/train.png" }
     ],
      governmentresources: [
-      { name: "Bus Lines", img: "Images/hartford/bus.png" },
-      { name: "Train Stations", img: "Images/hartford/train.png" }
+      { name: "Connecticut State Government", img: "Images/Connecticut/hartfordgovernment.png" },
+      { name: "Hartford City Government", img: "Images/hartford/train.png" }
     ],
      communityresources: [
-      { name: "Bus Lines", img: "Images/hartford/bus.png" },
-      { name: "Train Stations", img: "Images/hartford/train.png" }
+      { name: "City Services", img: "Images/Connecticut/hartfordctfiredept.png" },
+      { name: "Other", img: "Images/hartford/train.png" }
     ]
   },
   newhaven: {
@@ -190,6 +190,7 @@ const stateTitle = document.getElementById("stateTitle");
 }
 
   // --- Cities / Neighborhoods ---
+
   const stateCities = {
     connecticut: [
       { name: "Hartford", img: "Images/hartfordct.jpg" },
@@ -296,7 +297,7 @@ const categoryTitle = document.getElementById("categoryTitle");
     );
   }
   
-  // Breadcrumb
+  // =================== Breadcrumb ===================
   const breadcrumb = document.getElementById("categoryBreadcrumb");
     if (breadcrumb) {
       breadcrumb.innerHTML = `
@@ -307,7 +308,69 @@ const categoryTitle = document.getElementById("categoryTitle");
     }
   }
 
-// Local Insights Page
+
+  // =================== SUBCATEGORY PAGE ===================
+const subcategoryTitle = document.getElementById("subcategoryTitle");
+
+if (subcategoryTitle) {
+  const params = new URLSearchParams(window.location.search);
+  const city = params.get("city");
+  const category = params.get("category");
+  const subcategory = params.get("subcategory");
+
+  if (!city || !category || !subcategory) return;
+
+  const cityKey = city.toLowerCase();
+  const formattedCity = capitalize(city);
+  const formattedCategory = categoryLabels[category] || category;
+
+  // --- title and heading ---
+  document.title = `Neighborhood Navigator - ${subcategory} in ${formattedCity}`;
+  subcategoryTitle.textContent = `${subcategory} in ${formattedCity}`;
+
+
+ // --- Content ---
+  const content = document.getElementById("subcategoryContent");
+
+  // image from cityCategoryImages
+ const details = subcategoryDetails?.[cityKey]?.[category]?.[subcategory];
+
+if (content) {
+
+  if (details && details.length > 0) {
+    content.innerHTML = `
+      <div class="details-grid">
+        ${details.map(place => `
+          <div class="detail-card">
+            <img src="${place.img}" alt="${place.name}">
+            <h3>${place.name}</h3>
+            <p>${place.description}</p>
+            <p><strong>Address:</strong> ${place.address}</p>
+            <a href="${place.link}" target="_blank">Visit Website</a>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  } else {
+    content.innerHTML = `
+      <p>No detailed information available yet for ${subcategory}.</p>
+    `;
+  }
+
+  // Breadcrumb
+  const breadcrumb = document.getElementById("subcategoryBreadcrumb");
+  if (breadcrumb) {
+    breadcrumb.innerHTML = `
+      <a href="explore.html">Explore</a> &gt;
+      <a href="javascript:history.back()">${formattedCity}</a> &gt;
+      <a href="javascript:history.back()">${formattedCategory}</a> &gt;
+      <span>${subcategory}</span>
+    `;
+  }
+}
+
+}
+// =================== Local Insights Page ===================
 
 (function() {
   const tipForm = document.getElementById("tipForm");
