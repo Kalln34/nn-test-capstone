@@ -16,6 +16,7 @@ function animateCards(cards) {
 function createCards(grid, items, hrefCallback, textCallback, imgCallback) {
   if (!grid || !items) return;
   grid.innerHTML = "";
+  
   const cards = items.map((item, i) => {
     const card = document.createElement("a");
     card.className = "state-card";
@@ -53,6 +54,50 @@ const categoryLabels = {
   communityresources: "Community Resources"
 };
 
+
+// =================== CITY CATEGORY DATA ===================
+const cityCategoryImages = {
+  hartford: {
+    education: [
+      { name: "Public Schools", img: "Images/hartford/schools.png" },
+      { name: "Universities", img: "Images/hartford/universities.png" }
+    ],
+    healthcare: [
+      { name: "Hospitals", img: "Images/hartford/hospitals.png" },
+      { name: "Clinics", img: "Images/hartford/clinics.png" }
+    ],
+    publictransportation: [
+      { name: "Bus Lines", img: "Images/hartford/bus.png" },
+      { name: "Train Stations", img: "Images/hartford/train.png" }
+    ],
+    employment: [
+      { name: "Bus Lines", img: "Images/hartford/bus.png" },
+      { name: "Train Stations", img: "Images/hartford/train.png" }
+    ],
+     governmentresources: [
+      { name: "Bus Lines", img: "Images/hartford/bus.png" },
+      { name: "Train Stations", img: "Images/hartford/train.png" }
+    ],
+     communityresources: [
+      { name: "Bus Lines", img: "Images/hartford/bus.png" },
+      { name: "Train Stations", img: "Images/hartford/train.png" }
+    ]
+  },
+  newhaven: {
+    education: [
+      { name: "Public Schools", img: "Images/newhaven/schools.png" },
+      { name: "Universities", img: "Images/newhaven/universities.png" }
+    ],
+    healthcare: [
+      { name: "Hospitals", img: "Images/newhaven/hospitals.png" },
+      { name: "Clinics", img: "Images/newhaven/clinics.png" }
+    ],
+    publictransportation: [
+      { name: "Bus Lines", img: "Images/newhaven/bus.png" },
+      { name: "Train Stations", img: "Images/newhaven/train.png" }
+    ]
+  }
+};
 
 
 // =================== MAIN SCRIPT ===================
@@ -235,14 +280,22 @@ const categoryTitle = document.getElementById("categoryTitle");
 
     categoryTitle.textContent = `${formattedCategory} in ${formattedCity}`;
 
-    const content = document.getElementById("categoryContent");
+     const grid = document.getElementById("categoryGrid");
 
-    if (content) {
-      content.innerHTML = `
-        <p>Here you will find information about <strong>${formattedCategory}</strong> in ${formattedCity}.</p>
-      `;
-    }
+  if (grid) {
+    const items = (cityCategoryImages[city]?.[category]) || [
+      { name: formattedCategory, img: "Images/categories/default.png" }
+    ];
 
+    createCards(
+      grid,
+      items,
+      item => `subcategory.html?city=${city}&category=${category}&subcategory=${encodeURIComponent(item.name)}`,
+      item => item.name,
+      item => item.img
+    );
+  }
+  
   // Breadcrumb
   const breadcrumb = document.getElementById("categoryBreadcrumb");
     if (breadcrumb) {
