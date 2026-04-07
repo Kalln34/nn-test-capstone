@@ -55,51 +55,6 @@ const categoryLabels = {
 };
 
 
-// =================== CITY CATEGORY DATA ===================
-const cityCategoryImages = {
-  hartford: {
-    education: [
-      { name: "Public Schools", img: "Images/Connecticut/hartfordctschools.png" },
-      { name: "Universities", img: "Images/hartford/universities.png" }
-    ],
-    healthcare: [
-      { name: "Hospitals", img: "Images/Connecticut/hartfordhospital.png" },
-      { name: "Clinics", img: "Images/hartford/clinics.png" }
-    ],
-    publictransportation: [
-      { name: "Bus Lines", img: "Images/Connecticut/CTtransportation.png" },
-      { name: "Train Stations", img: "Images/hartford/train.png" }
-    ],
-    employment: [
-      { name: "Resources", img: "Images/hartford/bus.png" },
-      { name: "Companies in Connecticut", img: "Images/hartford/train.png" }
-    ],
-     governmentresources: [
-      { name: "Connecticut State Government", img: "Images/Connecticut/hartfordgovernment.png" },
-      { name: "Hartford City Government", img: "Images/hartford/train.png" }
-    ],
-     communityresources: [
-      { name: "City Services", img: "Images/Connecticut/hartfordctfiredept.png" },
-      { name: "Other", img: "Images/hartford/train.png" }
-    ]
-  },
-  newhaven: {
-    education: [
-      { name: "Public Schools", img: "Images/newhaven/schools.png" },
-      { name: "Universities", img: "Images/newhaven/universities.png" }
-    ],
-    healthcare: [
-      { name: "Hospitals", img: "Images/newhaven/hospitals.png" },
-      { name: "Clinics", img: "Images/newhaven/clinics.png" }
-    ],
-    publictransportation: [
-      { name: "Bus Lines", img: "Images/newhaven/bus.png" },
-      { name: "Train Stations", img: "Images/newhaven/train.png" }
-    ]
-  }
-};
-
-
 // =================== MAIN SCRIPT ===================
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -110,10 +65,11 @@ const searchInput = document.getElementById('stateSearch');
 const grid = document.querySelector('.states-grid');
 
   if (searchInput && grid) {
-    const states = Array.from(document.querySelectorAll('.state-card')).map(card => ({
-      name: card.textContent,
-      href: card.href
+    const states = Object.values(DATA).map(state => ({
+      name: state.name,
+      href: `state.html?state=${state.name.toLowerCase()}`
     }));
+
 
 
   // "No results" message
@@ -153,7 +109,9 @@ const stateTitle = document.getElementById("stateTitle");
 
   if (stateTitle) {
   const params = new URLSearchParams(window.location.search);
-  const stateName = params.get("state") || "Explore";
+    const stateName = params.get("state") || "Explore";
+    const stateKey = stateName.toLowerCase();
+    const stateData = DATA[stateKey];
 
   // --- Update title and heading ---
   document.title = `Neighborhood Navigator - ${capitalize(stateName)}`;
@@ -161,67 +119,34 @@ const stateTitle = document.getElementById("stateTitle");
 
 
   // --- Sidebar ---
-  const states = [
-    "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida",
-    "Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine",
-    "Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska",
-    "Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota",
-    "Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota",
-    "Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"
-  ];
-
   const sidebar = document.getElementById("stateSidebar");
-  if (sidebar) {
-  sidebar.innerHTML = ""; // clear any existing items
-
-  states.forEach(state => {
-    const li = document.createElement("li");
-    const a = document.createElement("a");
-    a.href = `state.html?state=${state.toLowerCase()}`;
-    a.textContent = state;
-
-    if (state.toLowerCase() === stateName.toLowerCase()) {
-      a.classList.add("active");
-  }
-
-    li.appendChild(a);
-    sidebar.appendChild(li);
-  });
-}
+    if (sidebar) {
+      sidebar.innerHTML = "";
+      Object.values(DATA).forEach(s => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = `state.html?state=${s.name.toLowerCase()}`;
+        a.textContent = s.name;
+        if (s.name.toLowerCase() === stateName.toLowerCase()) a.classList.add("active");
+        li.appendChild(a);
+        sidebar.appendChild(li);
+      });
+    }
 
   // --- Cities / Neighborhoods ---
 
-  const stateCities = {
-    connecticut: [
-      { name: "Hartford", img: "Images/hartfordct.jpg" },
-      { name: "New Haven", img: "Images/newhavenct.png" },
-      { name: "Stamford", img: "Images/stamfordct.png" },
-      { name: "Danbury", img: "Images/danburyct.png" },
-      { name: "Norwalk", img: "Images/norwalkct.png" },
-      { name: "Bridgeport", img: "Images/bridgeportct.png" },
-      { name: "New Britain", img: "Images/newbritainct.png" },
-      { name: "New London", img: "Images/newlondonct.png" }
-    ],
-    california: [
-      { name: "Los Angeles", img: "Images/cities/losangeles.jpg" },
-      { name: "San Francisco", img: "Images/cities/sanfrancisco.jpg" },
-      { name: "San Diego", img: "Images/cities/sandiego.jpg" },
-      { name: "Sacramento", img: "Images/cities/sacramento.jpg" },
-      { name: "San Jose", img: "Images/cities/sanjose.jpg" }
-    ]
-    // add other states here
-  };
+  const cities = stateData
+      ? Object.values(stateData.cities).map(city => ({ name: city.name, img: city.img }))
+      : [];
 
-  const cities = stateCities[stateName.toLowerCase()] || [
-    { name: "City 1", img: "Images/cities/default.jpg" },
-    { name: "City 2", img: "Images/cities/default.jpg" },
-    { name: "City 3", img: "Images/cities/default.jpg" },
-    { name: "City 4", img: "Images/cities/default.jpg" },
-    { name: "City 5", img: "Images/cities/default.jpg" }
-  ];
-  const cityGrid = document.getElementById("stateCardsGrid");
-    createCards(cityGrid, cities, city => `city.html?city=${city.name.toLowerCase().replace(/\s+/g,'')}`, city => city.name, city => city.img);
-
+    const cityGrid = document.getElementById("stateCardsGrid");
+    createCards(
+      cityGrid,
+      cities,
+      city => `city.html?state=${stateName.toLowerCase()}&city=${city.name.toLowerCase().replace(/\s+/g,'')}`,
+      city => city.name,
+      city => city.img
+    );
 
   // --- Breadcrumb ---
   const breadcrumb = document.getElementById("breadcrumbTrail");
@@ -234,28 +159,27 @@ const stateTitle = document.getElementById("stateTitle");
 
 // =================== CITY PAGE ===================
 const cityTitle = document.getElementById("cityTitle");
+  if (cityTitle) {
+    const params = new URLSearchParams(window.location.search);
+    const stateName = params.get("state");
+    const cityName = params.get("city");
+    if (!stateName || !cityName) return;
 
-if (cityTitle) {  
-  const params = new URLSearchParams(window.location.search);
-  const cityName = params.get("city");
-  if (!cityName) return;
+    const stateData = DATA[stateName.toLowerCase()];
+    const cityData = stateData?.cities[cityName.toLowerCase()];
+    if (!cityData) return;
 
-  // Better formatting
-  const formattedCity = cityName
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, c => c.toUpperCase());
+    const formattedCity = capitalize(cityName);
+    document.title = `Neighborhood Navigator - ${formattedCity}`;
+    cityTitle.textContent = formattedCity;
 
-  document.title = `Neighborhood Navigator - ${formattedCity}`;
-  cityTitle.textContent = formattedCity;
-
-  const categories = Object.keys(categoryLabels);
-  const grid = document.getElementById("categoryGrid");
-
-  if (grid) {
-      createCards(grid, categories, key => `category.html?city=${cityName}&category=${key}`, key => categoryLabels[key]);
+    const categories = Object.keys(cityData.categories || {});
+    const grid = document.getElementById("categoryGrid");
+    if (grid) {
+      createCards(grid, categories, key => `category.html?state=${stateName}&city=${cityName}&category=${key}`, key => categoryLabels[key]);
     }
 
+// --- Breadcrumb ---
     const breadcrumb = document.getElementById("cityBreadcrumb");
     if (breadcrumb) {
       breadcrumb.innerHTML = `
@@ -271,31 +195,33 @@ if (cityTitle) {
 const categoryTitle = document.getElementById("categoryTitle");
 
  if (categoryTitle) {
-  const params = new URLSearchParams(window.location.search);
-  const city = params.get("city");
-  const category = params.get("category");
+    const params = new URLSearchParams(window.location.search);
+    const stateName = params.get("state");
+    const cityName = params.get("city");
+    const category = params.get("category");
 
+    const cityData = DATA[stateName.toLowerCase()]?.cities[cityName.toLowerCase()];
+    const subcategories = cityData?.categories[category]?.subcategories || [];
 
-  const formattedCity = capitalize(city);
+    const formattedCity = capitalize(cityName);
     const formattedCategory = categoryLabels[category] || category;
-
     categoryTitle.textContent = `${formattedCategory} in ${formattedCity}`;
 
-     const grid = document.getElementById("categoryGrid");
+    const grid = document.getElementById("categoryGrid");
+    if (grid) {
+      const items = Object.entries(subcategories).map(([name, arr]) => ({
+        name,
+        img: arr[0]?.img || "Images/categories/default.png"
+      }));
+      createCards(
+        grid,
+        items,
+        item => `subcategory.html?state=${stateName}&city=${cityName}&category=${category}&subcategory=${encodeURIComponent(item.name)}`,
+        item => item.name,
+        item => item.img
+      );
+    }
 
-  if (grid) {
-    const items = (cityCategoryImages[city]?.[category]) || [
-      { name: formattedCategory, img: "Images/categories/default.png" }
-    ];
-
-    createCards(
-      grid,
-      items,
-      item => `subcategory.html?city=${city}&category=${category}&subcategory=${encodeURIComponent(item.name)}`,
-      item => item.name,
-      item => item.img
-    );
-  }
   
   // =================== Breadcrumb ===================
   const breadcrumb = document.getElementById("categoryBreadcrumb");
@@ -314,48 +240,43 @@ const subcategoryTitle = document.getElementById("subcategoryTitle");
 
 if (subcategoryTitle) {
   const params = new URLSearchParams(window.location.search);
-  const city = params.get("city");
+  const stateName = params.get("state");
+  const cityName = params.get("city");
   const category = params.get("category");
   const subcategory = params.get("subcategory");
+  
 
-  if (!city || !category || !subcategory) return;
+  if (!stateName || !cityName || !category || !subcategory) return;
 
-  const cityKey = city.toLowerCase();
-  const formattedCity = capitalize(city);
-  const formattedCategory = categoryLabels[category] || category;
+    const cityData = DATA[stateName.toLowerCase()]?.cities[cityName.toLowerCase()];
+    const details = cityData?.categories[category]?.subcategories[subcategory] || [];
 
-  // --- title and heading ---
-  document.title = `Neighborhood Navigator - ${subcategory} in ${formattedCity}`;
-  subcategoryTitle.textContent = `${subcategory} in ${formattedCity}`;
+    const formattedCity = capitalize(cityName);
+    const formattedCategory = categoryLabels[category] || category;
 
+    document.title = `Neighborhood Navigator - ${subcategory} in ${formattedCity}`;
+    subcategoryTitle.textContent = `${subcategory} in ${formattedCity}`;
 
- // --- Content ---
-  const content = document.getElementById("subcategoryContent");
-
-  // image from cityCategoryImages
- const details = subcategoryDetails?.[cityKey]?.[category]?.[subcategory];
-
-if (content) {
-
-  if (details && details.length > 0) {
-    content.innerHTML = `
-      <div class="details-grid">
-        ${details.map(place => `
-          <div class="detail-card">
-            <img src="${place.img}" alt="${place.name}">
-            <h3>${place.name}</h3>
-            <p>${place.description}</p>
-            <p><strong>Address:</strong> ${place.address}</p>
-            <a href="${place.link}" target="_blank">Visit Website</a>
+    const content = document.getElementById("subcategoryContent");
+    if (content) {
+      if (details.length > 0) {
+        content.innerHTML = `
+          <div class="details-grid">
+            ${details.map(place => `
+              <div class="detail-card">
+                <img src="${place.img}" alt="${place.name}">
+                <h3>${place.name}</h3>
+                <p>${place.description}</p>
+                <p><strong>Address:</strong> ${place.address}</p>
+                <a href="${place.link}" target="_blank">Visit Website</a>
+              </div>
+            `).join("")}
           </div>
-        `).join("")}
-      </div>
-    `;
-  } else {
-    content.innerHTML = `
-      <p>No detailed information available yet for ${subcategory}.</p>
-    `;
-  }
+        `;
+      } else {
+        content.innerHTML = `<p>No detailed information available yet for ${subcategory}.</p>`;
+      }
+
 
   // Breadcrumb
   const breadcrumb = document.getElementById("subcategoryBreadcrumb");
