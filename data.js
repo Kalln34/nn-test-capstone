@@ -3,7 +3,7 @@ const DATA = {
   // =================== Alabama ===================
     alabama: {
     name: "Alabama",
-    img: "Images/alabama-map.jpg",
+    img: "Images/Alabama/alabamaprofile.jpg",
     cities: {
       // Example city
       montgomery: {
