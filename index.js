@@ -50,8 +50,8 @@ const categoryLabels = {
   healthcare: "Healthcare",
   publictransportation: "Public Transportation",
   employment: "Employment",
-  governmentresources: "Government Resources",
-  communityresources: "Community Resources"
+  government: "Government Resources",
+  community: "Community Resources"
 };
 
 
@@ -61,38 +61,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // =================== EXPLORE PAGE ===================
 const exploreGrid = document.querySelector('.states-grid');
-
 const searchInput = document.getElementById('stateSearch');
 
-  if (exploreGrid) {
-    const states = Object.keys(DATA).map(key => ({
-      name: DATA[key].name,
-      href: `state.html?state=${key}`
-    }));
+if (exploreGrid) {
 
-    createCards(exploreGrid, states, state => state.href, state => state.name);
+  // =================== BUILD STATES ARRAY ===================
+  const states = Object.keys(DATA).map(key => ({
+    key,
+    name: DATA[key].name,
+    img: DATA[key].img,
+    href: `state.html?state=${key}`
+  }));
 
-
-  // "No results" message
-  if (searchInput) {
-  const noResults = document.createElement('p');
-  noResults.textContent = "No states found.";
-  noResults.style.textAlign = "center";
-  noResults.style.display = "none";
-  noResults.style.color = "#a0a64a";
-  noResults.style.fontWeight = "600";
-  noResults.style.marginTop = "20px";
-
-  exploreGrid.parentNode.insertBefore(noResults, exploreGrid.nextSibling);
-
-      searchInput.addEventListener('input', () => {
-        const filter = searchInput.value.toLowerCase();
-        const filtered = states.filter(state => state.name.toLowerCase().includes(filter));
-        noResults.style.display = filtered.length === 0 ? 'block' : 'none';
-        createCards(exploreGrid, filtered, state => state.href, state => state.name);
-      });
-    }
+  // =================== RENDER FUNCTION ===================
+  function renderStates(list) {
+    createCards(
+      exploreGrid,
+      list,
+      state => state.href,
+      state => state.name,
+      state => state.img
+    );
   }
+
+  // Initial render
+  renderStates(states);
+
+  // =================== SEARCH ===================
+  if (searchInput) {
+    const noResults = document.createElement('p');
+    noResults.textContent = "No states found.";
+    noResults.style.textAlign = "center";
+    noResults.style.display = "none";
+    noResults.style.color = "#a0a64a";
+    noResults.style.fontWeight = "600";
+    noResults.style.marginTop = "20px";
+
+    exploreGrid.parentNode.insertBefore(noResults, exploreGrid.nextSibling);
+
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+
+      const filtered = states.filter(state =>
+        state.name.toLowerCase().includes(filter)
+      );
+
+      noResults.style.display = filtered.length === 0 ? 'block' : 'none';
+
+      renderStates(filtered);
+    });
+  }
+}
 
 
 // =================== STATE PAGE ===================
@@ -187,12 +206,12 @@ const categoryTitleEl = document.getElementById("categoryTitle");
 
     const subGrid = document.getElementById("categoryGrid");
     if (subGrid) {
-      const subcategories = Object.keys(category.subcategories || {});
+      const subcategories = Object.entries(category.subcategories || {});
       createCards(
         subGrid,
         subcategories,
-        sub => `subcategory.html?state=${stateKey}&city=${cityKey}&category=${categoryKey}&subcategory=${encodeURIComponent(sub)}`,
-        sub => sub
+        ([key]) => `subcategory.html?state=${stateKey}&city=${cityKey}&category=${categoryKey}&subcategory=${encodeURIComponent(key)}`,
+        ([key, value]) => value.label || key
       );
     }
 
@@ -219,26 +238,35 @@ const subcategoryTitleEl = document.getElementById("subcategoryTitle");
     stateKey && cityKey && categoryKey && subcategoryKey &&
     DATA[stateKey]?.cities[cityKey]?.categories[categoryKey]?.subcategories[subcategoryKey]
   ) {
-    const items = DATA[stateKey].cities[cityKey].categories[categoryKey].subcategories[subcategoryKey];
+    const subcategoryObj = DATA[stateKey].cities[cityKey].categories[categoryKey].subcategories[subcategoryKey];
+    const items = subcategoryObj.items || [];
 
-    subcategoryTitleEl.textContent = `${subcategoryKey} in ${DATA[stateKey].cities[cityKey].name}`;
+    subcategoryTitleEl.textContent = `${subcategoryObj.label} in ${DATA[stateKey].cities[cityKey].name}`;
 
-    const content = document.getElementById("subcategoryContent");
-    if (content) {
-      if (items.length) {
-        content.innerHTML = items.map(place => `
-          <div class="detail-card">
-            <img src="${place.img}" alt="${place.name}">
-            <h3>${place.name}</h3>
-            <p>${place.description}</p>
-            <p><strong>Address:</strong> ${place.address}</p>
-            <a href="${place.link}" target="_blank">Visit Website</a>
-          </div>
-        `).join("");
-      } else {
-        content.innerHTML = `<p>No details available for ${subcategoryKey}.</p>`;
-      }
+  const content = document.getElementById("subcategoryContent");
+
+  if (content) {
+    if (items.length) {
+      content.innerHTML = items.map(place => `
+        <div class="detail-card">
+          <img src="${place.img || 'Images/default.jpg'}" alt="${place.name}">
+          
+          <h3>${place.name}</h3>
+          
+          ${place.description ? `<p>${place.description}</p>` : ""}
+          
+          ${place.address ? `<p><strong>Address:</strong> ${place.address}</p>` : ""}
+          
+          ${place.link && place.link !== "#" 
+            ? `<a href="${place.link}" target="_blank">Visit Website</a>` 
+            : ""
+          }
+        </div>
+      `).join("");
+    } else {
+      content.innerHTML = `<p>No details available for ${subcategoryObj.label}.</p>`;
     }
+  }
 
 
 
