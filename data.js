@@ -2,412 +2,400 @@
 const DATA = {
   // =================== Alabama ===================
     alabama: {
-    name: "Alabama",
-    img: "Images/Alabama/alabamaprofile.jpg",
-    cities: {
-      // Example city
-      montgomery: {
-        name: "Montgomery",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
+  name: "Alabama",
+  img: "Images/Alabama/alabamaprofile.jpg",
+  cities: {
+
+    montgomery: {
+      name: "Montgomery",
+      img: "Images/montgomeryal.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
                 {
-                  name: "Montgomery Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Alabama at Montgomery",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Montgomery Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Montgomery Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
+                  name: "Montgomery High School",
+                  description: "Public high school in Montgomery.",
+                  address: "Example address",
+                  img: "",
                   link: "#"
                 }
               ]
             }
           }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities for Alabama here
-    }
-  },
+        },
 
-  // =================== Alaska ===================
-  alaska: {
-    name: "Alaska",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Anchorage",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+        healthcare: {
+          label: "Healthcare",
+          subcategories: {
+            hospitals: {
+              label: "Hospitals",
+              items: [
+                {
+                  name: "Montgomery General Hospital",
+                  description: "Hospital in Montgomery.",
+                  address: "",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
+
+// =================== Alaska ===================
+alaska: {
+  name: "Alaska",
+  img: "Images/Alaska/alaskaprofile.jpg",
+  cities: {
+
+    anchorage: {
+      name: "Anchorage",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
 
 // =================== Arizona ===================
-  arizona: {
-    name: "Arizona",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      montgomery: {
-        name: "Phoenix",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
+arizona: {
+  name: "Arizona",
+  img: "Images/Arizona/arizonaprofile.jpg",
+  cities: {
+
+    phoenix: {
+      name: "Phoenix",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
                 {
-                  name: "Phoenix Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Arizona",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Arizona Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Arizona Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
                   link: "#"
                 }
               ]
             }
           }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
         }
+
       }
-      // Add more cities here
     }
-  },
+
+  }
+},
 
 // =================== Arkansas ===================
-  arkansas: {
-    name: "Arkansas",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      montgomery: {
-        name: "Little Rock",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Little Rock Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Arkansas",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Montgomery Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Montgomery Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
-  
-  // =================== California ===================
-  california: {
-    name: "California",
-    img: "Images/california-map.jpg",
-    cities: {
-      losangeles: {
-        name: "Los Angeles",
-        img: "Images/cities/losangeles.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                { name: "LA High School", description: "High school in LA.", address: "100 Main St, LA", img: "Images/cities/la-schools.png", link: "#" }
-              ]
-            }
-          }
-        }
-      },
-      sanfrancisco: {
-        name: "San Francisco",
-        img: "Images/cities/sanfrancisco.jpg",
-        categories: {
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                { name: "SF General Hospital", description: "Hospital in SF.", address: "200 SF St, SF", img: "Images/cities/sf-hospital.png", link: "#" }
-              ]
-            }
-          }
-        }
-      }
-      // Add other California cities here
-    }
-  },
+arkansas: {
+  name: "Arkansas",
+  img: "Images/Arkansas/arkansasprofile.jpg",
+  cities: {
 
-  // =================== Colorado ===================
-  colorado: {
-    name: "Colorado",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      montgomery: {
-        name: "Denver",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
+    littlerock: {
+      name: "Little Rock",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
                 {
-                  name: "Denver Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Colorado",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Denver Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Montgomery Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
                   link: "#"
                 }
               ]
             }
           }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
         }
-      }
-      // Add more cities for Colorado here
-    }
-  },
 
-  // =================== Connecticut ===================
-    connecticut: {
+      }
+    }
+
+  }
+},
+
+// =================== California ===================
+california: {
+  name: "California",
+  img: "Images/California/californiaprofile.jpg",
+  cities: {
+
+    losangeles: {
+      name: "Los Angeles",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Colorado ===================
+colorado: {
+  name: "Colorado",
+  img: "Images/Colorado/coloradoprofile.jpg",
+  cities: {
+
+    denver: {
+      name: "Denver",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Connecticut ===================
+  connecticut: {
     name: "Connecticut",
-    img: "Images/connecticut-map.jpg", // optional map/image for state page
+    img: "Images/Connecticut/ctstatephoto.jpg",
     cities: {
+
+      // =================== HARTFORD ===================
       hartford: {
         name: "Hartford",
         img: "Images/hartfordct.jpg",
         categories: {
+
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "Hartford Public High School",
-                  description: "Major public high school in Hartford.",
-                  address: "55 Forest St, Hartford, CT",
-                  img: "Images/hartford/school1.jpg",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Hartford",
-                  description: "Private university in Hartford.",
-                  address: "200 Bloomfield Ave, Hartford, CT",
-                  img: "Images/hartford/university.jpg",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "Hartford Public High School",
+                    description: "Major public high school in Hartford.",
+                    address: "55 Forest St, Hartford, CT",
+                    img: "Images/hartford/school1.jpg",
+                    link: "https://www.hartfordschools.org/o/hphs"
+                  }
+                ]
+              },
+
+              universities_colleges: {
+                label: "Universities and Colleges",
+                items: [
+                  {
+                    name: "University of Hartford",
+                    description: "Private university in Hartford.",
+                    address: "200 Bloomfield Ave, Hartford, CT",
+                    img: "Images/hartford/university.jpg",
+                    link: "https://www.hartford.edu/"
+                  },
+                  {
+                    name: "UConn Hartford",
+                    description: "Public university offering undergraduate and graduate programs.",
+                    address: "10 Prospect St, Hartford, CT",
+                    img: "",
+                    link: "https://hartford.uconn.edu/"
+                  },
+                  {
+                    name: "Trinity College",
+                    description: "Private liberal arts college in Hartford, Connecticut.",
+                    address: "300 Summit St, Hartford, CT",
+                    img: "",
+                    link: "https://www.trincoll.edu/"
+                  }
+                ]
+              }
             }
           },
+
           healthcare: {
             label: "Healthcare",
             subcategories: {
-              Hospitals: [
-                {
-                  name: "Hartford Hospital",
-                  description: "Major hospital in Hartford.",
-                  address: "80 Seymour St, Hartford, CT",
-                  img: "Images/Connecticut/hartfordhospital.png",
-                  link: "#"
-                }
-              ]
+              hospitals: {
+                label: "Hospitals",
+                items: [
+                  {
+                    name: "Hartford Hospital",
+                    description: "Major hospital in Hartford.",
+                    address: "80 Seymour St, Hartford, CT",
+                    img: "Images/Connecticut/hartfordhospital.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           },
+
           publictransportation: {
             label: "Public Transportation",
             subcategories: {
-              Transportation: [
-                {
-                  name: "By Rail",
-                  description: "Hartford Line.",
-                  address: "1 Union Pl., Hartford, CT",
-                  img: "Images/Connecticut/hartfordtrain.png",
-                  link: "#"
-                }
-              ]
+              transportation: {
+                label: "Transportation",
+                items: [
+                  {
+                    name: "By Rail",
+                    description: "Hartford Line.",
+                    address: "1 Union Pl., Hartford, CT",
+                    img: "Images/Connecticut/hartfordtrain.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           },
+
           employment: {
             label: "Employment",
             subcategories: {
-              Workinhartford: [
-                {
-                  name: "Working in Hartford",
-                  description: "Major employeers in Hartford.",
-                  img: "Images/Connecticut/hartfordhospital.png",
-                  link: "#"
-                }
-              ]
+              working_hartford: {
+                label: "Working in Hartford",
+                items: [
+                  {
+                    name: "Working in Hartford",
+                    description: "Overview of major employers and job opportunities in Hartford.",
+                    address: "",
+                    img: "Images/hartford/employment.jpg",
+                    link: "#"
+                  }
+                ]
+              },
+              major_employers: {
+                label: "Major Employers",
+                items: [
+                  {
+                    name: "Aetna",
+                    description: "Major healthcare company headquartered in Hartford.",
+                    address: "151 Farmington Ave, Hartford, CT",
+                    img: "",
+                    link: "#"
+                  },
+                  {
+                    name: "The Hartford",
+                    description: "Insurance company with a large workforce in the city.",
+                    address: "1 Hartford Plaza, Hartford, CT",
+                    img: "",
+                    link: "#"
+                  }
+                ]
+              }
             }
           },
+
           government: {
             label: "Government Information",
             subcategories: {
-              governmentct: [
-                {
-                  name: "Connecticut State Government",
-                  description: "Departments and Agencies",
-                  img: "Images/Connecticut/hartfordgovernment.png",
-                  link: "#"
-                }
-              ]
+              state_government: {
+                label: "Connecticut State Government",
+                items: [
+                  {
+                    name: "Connecticut State Government",
+                    description: "Departments and Agencies",
+                    img: "Images/Connecticut/hartfordgovernment.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           },
+
           community: {
             label: "Community Resources",
             subcategories: {
-              governmentct: [
-                {
-                  name: "Public Safety and Emergency Services",
-                  description: "",
-                  img: "Images/Connecticut/hartfordgovernment.png",
-                  link: "#"
-                }
-              ]
+              public_safety: {
+                label: "Public Safety and Emergency Services",
+                items: [
+                  {
+                    name: "Public Safety and Emergency Services",
+                    description: "",
+                    img: "Images/Connecticut/hartfordgovernment.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
-          }// Add other categories here: publictransportation, employment, governmentresources, communityresources
-        }
-      },
+          }
+
+        } // end categories
+      }, // end hartford
+
+      // =================== NEW HAVEN ===================
       newhaven: {
         name: "New Haven",
         img: "Images/newhavenct.png",
@@ -415,19 +403,24 @@ const DATA = {
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "New Haven High",
-                  description: "High school in New Haven.",
-                  address: "123 Main St, New Haven, CT",
-                  img: "Images/newhaven/schools.png",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "New Haven High",
+                    description: "High school in New Haven.",
+                    address: "123 Main St, New Haven, CT",
+                    img: "Images/newhaven/schools.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           }
         }
       },
+
+      // =================== STAMFORD ===================
       stamford: {
         name: "Stamford",
         img: "Images/stamfordct.png",
@@ -435,19 +428,24 @@ const DATA = {
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "Stamford High School",
-                  description: "High school in New Haven.",
-                  address: "123 Main St, New Haven, CT",
-                  img: "Images/newhaven/schools.png",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "Stamford High School",
+                    description: "High school in Stamford.",
+                    address: "123 Main St, Stamford, CT",
+                    img: "Images/newhaven/schools.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           }
         }
       },
+
+      // =================== DANBURY ===================
       danbury: {
         name: "Danbury",
         img: "Images/danburyct.png",
@@ -455,19 +453,24 @@ const DATA = {
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "Danbury High School",
-                  description: "High school in New Haven.",
-                  address: "123 Main St, New Haven, CT",
-                  img: "Images/newhaven/schools.png",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "Danbury High School",
+                    description: "High school in Danbury.",
+                    address: "123 Main St, Danbury, CT",
+                    img: "Images/newhaven/schools.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           }
         }
       },
+
+      // =================== NORWALK ===================
       norwalk: {
         name: "Norwalk",
         img: "Images/norwalkct.png",
@@ -475,19 +478,24 @@ const DATA = {
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "Norwalk High School",
-                  description: "High school in New Haven.",
-                  address: "123 Main St, New Haven, CT",
-                  img: "Images/newhaven/schools.png",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "Norwalk High School",
+                    description: "High school in Norwalk.",
+                    address: "123 Main St, Norwalk, CT",
+                    img: "Images/newhaven/schools.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           }
         }
       },
+
+      // =================== BRIDGEPORT ===================
       bridgeport: {
         name: "Bridgeport",
         img: "Images/bridgeportct.png",
@@ -495,19 +503,24 @@ const DATA = {
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "Bridgeport High School",
-                  description: "High school in New Haven.",
-                  address: "123 Main St, New Haven, CT",
-                  img: "Images/newhaven/schools.png",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "Bridgeport High School",
+                    description: "High school in Bridgeport.",
+                    address: "123 Main St, Bridgeport, CT",
+                    img: "Images/newhaven/schools.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           }
         }
       },
+
+      // =================== NEW BRITAIN ===================
       newbritain: {
         name: "New Britain",
         img: "Images/newbritainct.png",
@@ -515,19 +528,24 @@ const DATA = {
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "Stamford High School",
-                  description: "High school in New Haven.",
-                  address: "123 Main St, New Haven, CT",
-                  img: "Images/newhaven/schools.png",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "New Britain High School",
+                    description: "High school in New Britain.",
+                    address: "123 Main St, New Britain, CT",
+                    img: "Images/newhaven/schools.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           }
         }
       },
+
+      // =================== NEW LONDON ===================
       newlondon: {
         name: "New London",
         img: "Images/newlondonct.png",
@@ -535,1424 +553,1528 @@ const DATA = {
           education: {
             label: "Education",
             subcategories: {
-              "Public Schools": [
-                {
-                  name: "Stamford High School",
-                  description: "High school in New Haven.",
-                  address: "123 Main St, New Haven, CT",
-                  img: "Images/newhaven/schools.png",
-                  link: "#"
-                }
-              ]
+              public_schools: {
+                label: "Public Schools",
+                items: [
+                  {
+                    name: "New London High School",
+                    description: "High school in New London.",
+                    address: "123 Main St, New London, CT",
+                    img: "Images/newhaven/schools.png",
+                    link: "#"
+                  }
+                ]
+              }
             }
           }
         }
-      } // Add other Connecticut cities here
+      },
     }
   },
 
-  // =================== Delaware ===================
-  delaware: {
-    name: "Delaware",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      wilmington: {
-        name: "Wilmington",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Wilmington Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Delaware",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Denver Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+// =================== Delaware ===================
+delaware: {
+  name: "Delaware",
+  img: "Images/Delaware/delawareprofile.jpg",
+  cities: {
 
-  // =================== Florida ===================
-  florida: {
-    name: "Florida",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Miami",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Miami Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Miami",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+    wilmington: {
+      name: "Wilmington",
+      img: "Images/city.jpg",
+      categories: {
 
-  // =================== Georgia ===================
-  georgia: {
-    name: "Georgia",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Atlanta",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
                 {
-                  name: "Atlanta Public Schools",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University of Georgia",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
                   link: "#"
                 }
               ]
             }
           }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
         }
-      }
-      // Add more cities here
-    }
-  },
 
-  // =================== Hawaii ===================
-  hawaii: {
-    name: "Hawaii",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Honolulu",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
       }
-      // Add more cities here
     }
-  },
 
-  // =================== Idaho ===================
-  idaho: {
-    name: "Idaho",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Boise",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+  }
+},
 
-  // =================== Illinois ===================
-  illinois: {
-    name: "Illinois",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Chicago",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+// =================== Florida ===================
+florida: {
+  name: "Florida",
+  img: "Images/Florida/floridaprofile.jpg",
+  cities: {
 
-  // =================== Indiana ===================
-  indiana: {
-    name: "Indiana",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Fort Wayne",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+    miami: {
+      name: "Miami",
+      img: "Images/city.jpg",
+      categories: {
 
-  // =================== Iowa ===================
-  iowa: {
-    name: "Iowa",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Cedar Rapids",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
                 {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
                   link: "#"
                 }
               ]
             }
           }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
         }
-      }
-      // Add more cities here
-    }
-  },
 
-  // =================== Kansas ===================
-  kansas: {
-    name: "Kansas",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Wichita",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
       }
-      // Add more cities here
     }
-  },
 
-  // =================== Kentucky ===================
-  kentucky: {
-    name: "Kentucky",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Louisville",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+  }
+},
 
-  // =================== Louisiana ===================
-  louisiana: {
-    name: "Louisiana",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Lafayette",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+// =================== Georgia ===================
+georgia: {
+  name: "Georgia",
+  img: "Images/Georgia/georgiaprofile.jpg",
+  cities: {
 
-  // =================== Maine ===================
-  maine: {
-    name: "Maine",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Miami",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
-                {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
-                  link: "#"
-                }
-              ]
-            }
-          }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
-        }
-      }
-      // Add more cities here
-    }
-  },
+    atlanta: {
+      name: "Atlanta",
+      img: "Images/city.jpg",
+      categories: {
 
-  // =================== Maryland ===================
-  maryland: {
-    name: "Maryland",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Annapolis",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
                 {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
                   link: "#"
                 }
               ]
             }
           }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
         }
-      }
-      // Add more cities here
-    }
-  },
 
-  // =================== Massachusetts ===================
-  massachusetts: {
-    name: "Massachusetts",
-    img: "Images/alabama-map.jpg",
-    cities: {
-      // Example city
-      miami: {
-        name: "Miami",
-        img: "Images/montgomery.jpg",
-        categories: {
-          education: {
-            label: "Education",
-            subcategories: {
-              "Public Schools": [
+      }
+    }
+
+  }
+},
+
+// =================== Hawaii ===================
+hawaii: {
+  name: "Hawaii",
+  img: "Images/Hawaii/hawaiiprofile.jpg",
+  cities: {
+
+    honolulu: {
+      name: "Honolulu",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
                 {
-                  name: "Public School",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/school.png",
-                  link: "#"
-                }
-              ],
-              "Universities": [
-                {
-                  name: "University",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/university.png",
-                  link: "#"
-                }
-              ]
-            }
-          },
-          healthcare: {
-            label: "Healthcare",
-            subcategories: {
-              Hospitals: [
-                {
-                  name: "Hospital",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/hospital.png",
-                  link: "#"
-                }
-              ],
-              Clinics: [
-                {
-                  name: "Clinic",
-                  description: "Description here",
-                  address: "Address here",
-                  img: "Images/montgomery/clinic.png",
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
                   link: "#"
                 }
               ]
             }
           }
-          // Add other categories: publictransportation, employment, governmentresources, communityresources
         }
+
       }
-      // Add more cities here
     }
-  },
+
+  }
+},
+
+// =================== Idaho ===================
+idaho: {
+  name: "Idaho",
+  img: "Images/Idaho/idahoprofile.jpg",
+  cities: {
+
+    boise: {
+      name: "Boise",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Illinois ===================
+illinois: {
+  name: "Illinois",
+  img: "Images/Illinois/illinoisprofile.jpg",
+  cities: {
+
+    chicago: {
+      name: "Chicago",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Indiana ===================
+indiana: {
+  name: "Indiana",
+  img: "Images/Indiana/indianaprofile.jpg",
+  cities: {
+
+    fortwayne: {
+      name: "Fort Wayne",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Iowa ===================
+iowa: {
+  name: "Iowa",
+  img: "Images/Iowa/iowaprofile.jpg",
+  cities: {
+
+    cedarrapids: {
+      name: "Cedar Rapids",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Kansas ===================
+kansas: {
+  name: "Kansas",
+  img: "Images/Kansas/kansasprofile.jpg",
+  cities: {
+
+    wichita: {
+      name: "Wichita",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Kentucky ===================
+kentucky: {
+  name: "Kentucky",
+  img: "Images/Kentucky/kentuckyprofile.jpg",
+  cities: {
+
+    louisville: {
+      name: "Louisville",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Louisiana ===================
+louisiana: {
+  name: "Louisiana",
+  img: "Images/Louisiana/louisianaprofile.jpg",
+  cities: {
+
+    lafayette: {
+      name: "Lafayette",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Maine ===================
+maine: {
+  name: "Maine",
+  img: "Images/Maine/maineprofile.jpg",
+  cities: {
+
+    portland: {
+      name: "Portland",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Maryland ===================
+maryland: {
+  name: "Maryland",
+  img: "Images/Maryland/marylandprofile.jpg",
+  cities: {
+
+    annapolis: {
+      name: "Annapolis",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
+
+// =================== Massachusetts ===================
+massachusetts: {
+  name: "Massachusetts",
+  img: "Images/Massachusetts/massprofile.jpg",
+  cities: {
+
+    boston: {
+      name: "Boston",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
+        }
+
+      }
+    }
+
+  }
+},
 
 // =================== Michigan ===================
 michigan: {
-    name: "Michigan",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Ann Arbor",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Michigan",
+  img: "Images/Michigan/michiganprofile.jpg",
+  cities: {
+
+    annarbor: {
+      name: "Ann Arbor",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Minnesota ===================
 minnesota: {
-    name: "Minnesota",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Minneapolis",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Minnesota",
+  img: "Images/Minnesota/minnesotaprofile.jpg",
+  cities: {
+
+    minneapolis: {
+      name: "Minneapolis",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Mississippi ===================
 mississippi: {
-    name: "Mississippi",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Greenville",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Mississippi",
+  img: "Images/Mississippi/mississippiprofile.jpg",
+  cities: {
+
+    greenville: {
+      name: "Greenville",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Missouri ===================
 missouri: {
-    name: "Missouri",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Kansas City",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Missouri",
+  img: "Images/Missouri/missouriprofile.jpg",
+  cities: {
+
+    stlouis: {
+      name: "St. Louis",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Montana ===================
 montana: {
-    name: "Montana",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Great Falls",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Montana",
+  img: "Images/Montana/montanaprofile.jpg",
+  cities: {
+
+    billings: {
+      name: "Billings",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Nebraska ===================
 nebraska: {
-    name: "Nebraska",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Omaha",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Nebraska",
+  img: "Images/Nebraska/nebraskaprofile.jpg",
+  cities: {
+
+    omaha: {
+      name: "Omaha",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Nevada ===================
 nevada: {
-    name: "Nevada",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Reno",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Nevada",
+  img: "Images/Nevada/nevadaprofile.jpg",
+  cities: {
+
+    reno: {
+      name: "Reno",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== New Hampshire ===================
 newhampshire: {
-    name: "New Hampshire",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Portsmouth",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "New Hampshire",
+  img: "Images/Newhampshire/newhampshireprofile.jpg",
+  cities: {
+
+    portsmouth: {
+      name: "Portsmouth",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== New Jersey ===================
 newjersey: {
-    name: "New Jersey",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Newark",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "New Jersey",
+  img: "Images/Newjersey/newjerseyprofile.jpg",
+  cities: {
+
+    newark: {
+      name: "Newark",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== New Mexico ===================
 newmexico: {
-    name: "New Mexico",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Santa Fe",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "New Mexico",
+  img: "Images/Newmexico/newmexicoprofile.jpg",
+  cities: {
+
+    santafe: {
+      name: "Santa Fe",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== New York ===================
 newyork: {
-    name: "New York",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Albany",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "New York",
+  img: "Images/Newyork/newyorkprofile.jpg",
+  cities: {
+
+    albany: {
+      name: "Albany",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== North Carolina ===================
 northcarolina: {
-    name: "North Carolina",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Raleigh",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "North Carolina",
+  img: "Images/Northcarolina/northcarolinaprofile.jpg",
+  cities: {
+
+    raleigh: {
+      name: "Raleigh",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== North Dakota ===================
 northdakota: {
-    name: "North Dakota",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Grand Forks",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "North Dakota",
+  img: "Images/Northdakota/northdakotaprofile.jpg",
+  cities: {
+
+    grandforks: {
+      name: "Grand Forks",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Ohio ===================
 ohio: {
-    name: "Ohio",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Cleveland",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Ohio",
+  img: "Images/Ohio/ohioprofile.jpg",
+  cities: {
+
+    cleveland: {
+      name: "Cleveland",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Oklahoma ===================
 oklahoma: {
-    name: "Oklahoma",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Tulsa",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Oklahoma",
+  img: "Images/Oklahoma/oklahomaprofile.jpg",
+  cities: {
+
+    tulsa: {
+      name: "Tulsa",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Oregon ===================
 oregon: {
-    name: "Oregon",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Portland",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Oregon",
+  img: "Images/Oregon/oregonprofile.jpg",
+  cities: {
+
+    portland: {
+      name: "Portland",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Pennsylvania ===================
 pennsylvania: {
-    name: "Alaska",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Pittsburg",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Pennsylvania",
+  img: "Images/Pennsylvania/pennsylvaniaprofile.jpg",
+  cities: {
+
+    pittsburg: {
+      name: "Pittsburg",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Rhode Island ===================
 rhodeisland: {
-    name: "Rhode Island",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Newport",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Rhode Island",
+  img: "Images/Rhodeisland/rhodeislandprofile.jpg",
+  cities: {
+
+    newport: {
+      name: "Newport",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== South Carolina ===================
 southcarolina: {
-    name: "South Carolina",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Columbia",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "South Carolina",
+  img: "Images/Southcarolina/southcarolinaprofile.jpg",
+  cities: {
+
+    columbia: {
+      name: "Columbia",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== South Dakota ===================
 southdakota: {
-    name: "South Dakota",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Sioux Falls",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "South Dakota",
+  img: "Images/Southdakota/southdakotaprofile.jpg",
+  cities: {
+
+    siouxfalls: {
+      name: "Sioux Falls",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Tennessee ===================
 tennessee: {
-    name: "Tennessee",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Memphis",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Tennessee",
+  img: "Images/Tennessee/tennesseeprofile.jpg",
+  cities: {
+
+    memphis: {
+      name: "Memphis",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Texas ===================
 texas: {
-    name: "Texas",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Forth Worth",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Texas",
+  img: "Images/Texas/texasprofile.jpg",
+  cities: {
+
+    fortworth: {
+      name: "Fort Worth",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Utah ===================
 utah: {
-    name: "Utah",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Salt Lake City",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Utah",
+  img: "Images/Utah/utahprofile.jpg",
+  cities: {
+
+    saltlakecity: {
+      name: "Salt Lake City",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Vermont ===================
 vermont: {
-    name: "Vermont",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Burlington",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Vermont",
+  img: "Images/Vermont/vermontprofile.jpg",
+  cities: {
+
+    burlington: {
+      name: "Burlington",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Virginia ===================
 virginia: {
-    name: "Virginia",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Richmond",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Virginia",
+  img: "Images/Virginia/virginiaprofile.jpg",
+  cities: {
+
+    richmond: {
+      name: "Richmond",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Washington ===================
 washington: {
-    name: "Washington",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Spokane",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Washington",
+  img: "Images/Washington/washingtonprofile.jpg",
+  cities: {
+
+    spokane: {
+      name: "Spokane",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== West Virginia ===================
 westvirginia: {
-    name: "West Virginia",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Huntington",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "West Virginia",
+  img: "Images/Westvirginia/westvirginiaprofile.jpg",
+  cities: {
+
+    huntington: {
+      name: "Huntington",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Wisconsin ===================
 wisconsin: {
-    name: "Wisconsin",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Madison",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Wisconsin",
+  img: "Images/Wisconsin/wisconsinprofile.jpg",
+  cities: {
+
+    madison: {
+      name: "Madison",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  },
+
+  }
+},
 
 // =================== Wyoming ===================
 wyoming: {
-    name: "Wyoming",
-    img: "Images/alaska-map.jpg",
-    cities: {
-      // Placeholder city
-      anchorage: {
-        name: "Casper",
-        img: "Images/anchorage.jpg",
-        categories: {
-          education: { label: "Education", subcategories: {} },
-          healthcare: { label: "Healthcare", subcategories: {} }
-          // Other categories
+  name: "Wyoming",
+  img: "Images/Wyoming/wyomingprofile.jpg",
+  cities: {
+
+    casper: {
+      name: "Casper",
+      img: "Images/city.jpg",
+      categories: {
+
+        education: {
+          label: "Education",
+          subcategories: {
+            public_schools: {
+              label: "Public Schools",
+              items: [
+                {
+                  name: "Example School",
+                  description: "Description",
+                  address: "Address",
+                  img: "",
+                  link: "#"
+                }
+              ]
+            }
+          }
         }
+
       }
     }
-  }
 
-};
+  }
+},
+// =================== add new state after },===================
+}
