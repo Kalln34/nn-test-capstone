@@ -250,7 +250,7 @@ colorado: {
                     name: "Hartford Public High School",
                     description: "Major public high school in Hartford.",
                     address: "55 Forest St, Hartford, CT",
-                    img: "Images/hartford/school1.jpg",
+                    img: "Images/Connecticut/hartfordctschools.png",
                     link: "https://www.hartfordschools.org/o/hphs"
                   }
                 ]
@@ -263,21 +263,21 @@ colorado: {
                     name: "University of Hartford",
                     description: "Private university in Hartford.",
                     address: "200 Bloomfield Ave, Hartford, CT",
-                    img: "Images/hartford/university.jpg",
+                    img: "Images/Connecticut/uhart.png",
                     link: "https://www.hartford.edu/"
                   },
                   {
                     name: "UConn Hartford",
                     description: "Public university offering undergraduate and graduate programs.",
                     address: "10 Prospect St, Hartford, CT",
-                    img: "",
+                    img: "Images/Connecticut/uconnhart.png",
                     link: "https://hartford.uconn.edu/"
                   },
                   {
                     name: "Trinity College",
                     description: "Private liberal arts college in Hartford, Connecticut.",
                     address: "300 Summit St, Hartford, CT",
-                    img: "",
+                    img: "Images/Connecticut/trinitycollege.png",
                     link: "https://www.trincoll.edu/"
                   }
                 ]
@@ -296,7 +296,21 @@ colorado: {
                     description: "Major hospital in Hartford.",
                     address: "80 Seymour St, Hartford, CT",
                     img: "Images/Connecticut/hartfordhospital.png",
-                    link: "#"
+                    link: "https://hartfordhospital.org/"
+                  },
+                  {
+                    name: "Trinity Health of New Englad",
+                    description: "Major hospital in Hartford.",
+                    address: "1000 Asylum Ave, 5th Floor, Hartford, CT",
+                    img: "Images/Connecticut/trinityhealth.png",
+                    link: "https://www.trinityhealthofne.org/location/trinity-health-of-new-england"
+                  },
+                   {
+                    name: "Connecticut Children's Medical Center",
+                    description: "A nationally ranked, independent, non-profit, pediatric acute care hospital located in Hartford, Connecticut.",
+                    address: "282 Washington St, Hartford, CT",
+                    img: "Images/Connecticut/ctchildrenhosp.png",
+                    link: "https://www.connecticutchildrens.org/locations/connecticut-childrens-hartford"
                   }
                 ]
               }
@@ -310,11 +324,23 @@ colorado: {
                 label: "Transportation",
                 items: [
                   {
-                    name: "By Rail",
-                    description: "Hartford Line.",
+                    name: "By Bus",
+                    description: "Hartford Line",
+                    img: "Images/Connecticut/hartfordbus.png",
+                    link: "https://www.cttransit.com/services"
+                  },
+                  {
+                    name: "By Train",
+                    description: "Union Station",
                     address: "1 Union Pl., Hartford, CT",
-                    img: "Images/Connecticut/hartfordtrain.png",
-                    link: "#"
+                    img: "Images/Connecticut/unionstation.png",
+                    link: "https://hartfordline.com/route_stations/hartford/"
+                  },
+                  {
+                    name: "By Car",
+                    description: "Hartford Parking",
+                    img: "Images/Connecticut/parking.png",
+                    link: "https://hartfordparking.com/"
                   }
                 ]
               }
@@ -325,33 +351,26 @@ colorado: {
             label: "Employment",
             subcategories: {
               working_hartford: {
-                label: "Working in Hartford",
+                label: "Employment Opportunities",
                 items: [
                   {
-                    name: "Working in Hartford",
+                    type: "intro",
+                    name: "Major Employers in Hartford",
                     description: "Overview of major employers and job opportunities in Hartford.",
-                    address: "",
-                    img: "Images/hartford/employment.jpg",
-                    link: "#"
-                  }
-                ]
-              },
-              major_employers: {
-                label: "Major Employers",
-                items: [
-                  {
+                  },
+                   {
                     name: "Aetna",
                     description: "Major healthcare company headquartered in Hartford.",
                     address: "151 Farmington Ave, Hartford, CT",
-                    img: "",
-                    link: "#"
+                    img: "Images/Connecticut/aetnabuilding.png",
+                    link: "https://jobs.cvshealth.com/us/en"
                   },
                   {
                     name: "The Hartford",
                     description: "Insurance company with a large workforce in the city.",
                     address: "1 Hartford Plaza, Hartford, CT",
-                    img: "",
-                    link: "#"
+                    img: "Images/Connecticut/thehartford.png",
+                    link: "https://www.thehartford.com/"
                   }
                 ]
               }
@@ -359,16 +378,22 @@ colorado: {
           },
 
           government: {
-            label: "Government Information",
+            label: "Government and City Resources",
             subcategories: {
               state_government: {
-                label: "Connecticut State Government",
+                label: "City Government and Community Resources",
                 items: [
                   {
-                    name: "Connecticut State Government",
+                    name: "The City of Hartford",
                     description: "Departments and Agencies",
-                    img: "Images/Connecticut/hartfordgovernment.png",
-                    link: "#"
+                    img: "Images/Connecticut/cityofhartford.png",
+                    link: "https://www.hartfordct.gov/Home"
+                  },
+                  {
+                    name: "Public Safety and Emergency Services",
+                    description: "Departments and Agencies",
+                    img: "Images/Connecticut/hartfordctfiredept.png",
+                    link: "https://www.hartfordct.gov/Government/Departments"
                   }
                 ]
               }
@@ -376,16 +401,22 @@ colorado: {
           },
 
           community: {
-            label: "Community Resources",
+            label: "Things to Do",
             subcategories: {
               public_safety: {
-                label: "Public Safety and Emergency Services",
+                label: "Things to Do in Hartford",
                 items: [
                   {
-                    name: "Public Safety and Emergency Services",
-                    description: "",
-                    img: "Images/Connecticut/hartfordgovernment.png",
-                    link: "#"
+                    name: "Connecticut Convention Center",
+                    description: "The Connecticut Convention Center is one of the northeast’s most ideal location for trade shows, conventions, business meetings or any occasion demanding a dramatic riverfront setting.",
+                    img: "Images/Connecticut/ctconvention.png",
+                    link: "https://www.ctconventions.com/"
+                  },
+                  {
+                    name: "The Bushnell Performing Arts Center",
+                    description: "Connecticut's premiere performing arts center, presenting more than 350 events annually, including major Broadway tours, symphony orchestras, and more.",
+                    img: "Images/Connecticut/bushnellct.png",
+                    link: "https://bushnell.org/"
                   }
                 ]
               }
@@ -396,7 +427,7 @@ colorado: {
       }, // end hartford
 
       // =================== NEW HAVEN ===================
-      newhaven: {
+        newhaven: {
         name: "New Haven",
         img: "Images/newhavenct.png",
         categories: {
@@ -421,7 +452,7 @@ colorado: {
       },
 
       // =================== STAMFORD ===================
-      stamford: {
+        stamford: {
         name: "Stamford",
         img: "Images/stamfordct.png",
         categories: {

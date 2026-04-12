@@ -1,48 +1,38 @@
 // =================== Helper Functions ===================
 function capitalize(str) {
-  if (!str) return '';
+  if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function animateCards(cards) {
-  cards.forEach((card, index) => {
-    card.style.display = "flex";
-    card.style.animation = `fadeInCard 0.5s forwards`;
-    card.style.animationDelay = `${index * 0.1}s`;
-  });
-}
+function createCards(container, items, getHref, getTitle, getImg) {
+  if (!container) return;
 
-// Reusable function to create cards in a grid
-function createCards(grid, items, hrefCallback, textCallback, imgCallback) {
-  if (!grid || !items) return;
-  grid.innerHTML = "";
-  
-  const cards = items.map((item, i) => {
+  container.innerHTML = "";
+
+  if (!items || items.length === 0) {
+    container.innerHTML = "<p style='color:white'>No results found.</p>";
+    return;
+  }
+
+  items.forEach(item => {
     const card = document.createElement("a");
     card.className = "state-card";
-    card.href = hrefCallback(item);
+    card.href = getHref(item);
 
-    if (imgCallback) {
+    if (getImg) {
       const img = document.createElement("img");
-      img.src = imgCallback(item);
-      img.alt = textCallback(item);
+      img.src = getImg(item);
+      img.alt = getTitle(item);
       card.appendChild(img);
     }
 
-    const name = document.createElement("span");
-    name.textContent = textCallback(item);
-    card.appendChild(name);
+    const title = document.createElement("span");
+    title.textContent = getTitle(item);
+    card.appendChild(title);
 
-    card.style.animation = `fadeInCard 0.5s forwards`;
-    card.style.animationDelay = `${i * 0.1}s`;
-
-    grid.appendChild(card);
-    return card;
+    container.appendChild(card);
   });
-
-  animateCards(cards);
 }
-
 
 // =================== CATEGORY LABELS ===================
 const categoryLabels = {
@@ -57,39 +47,55 @@ const categoryLabels = {
 
 // =================== MAIN SCRIPT ===================
 document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+
+  const stateKey = params.get("state");
+  const cityKey = params.get("city");
+  const categoryKey = params.get("category");
+  const subcategoryKey = params.get("subcategory");
+
 
 
 // =================== EXPLORE PAGE ===================
-const exploreGrid = document.querySelector('.states-grid');
-const searchInput = document.getElementById('stateSearch');
+const exploreGrid = document.querySelector(".states-grid");
+  const searchInput = document.getElementById("stateSearch");
 
-if (exploreGrid) {
+  let states = [];
 
-  // =================== BUILD STATES ARRAY ===================
-  const states = Object.keys(DATA).map(key => ({
-    key,
-    name: DATA[key].name,
-    img: DATA[key].img,
-    href: `state.html?state=${key}`
-  }));
+  if (exploreGrid && typeof DATA !== "undefined") {
+    states = Object.keys(DATA).map(key => ({
+      key,
+      name: DATA[key].name,
+      img: DATA[key].img
+    }));
 
-  // =================== RENDER FUNCTION ===================
-  function renderStates(list) {
-    createCards(
-      exploreGrid,
-      list,
-      state => state.href,
-      state => state.name,
-      state => state.img
-    );
-  }
+    function renderStates(list) {
+      createCards(
+        exploreGrid,
+        list,
+        s => `state.html?state=${s.key}`,
+        s => s.name,
+        s => s.img
+      );
+    }
 
-  // Initial render
-  renderStates(states);
+    renderStates(states);
 
-  // =================== SEARCH ===================
-  if (searchInput) {
-    const noResults = document.createElement('p');
+    if (searchInput) {
+      searchInput.addEventListener("input", () => {
+        const filter = searchInput.value.toLowerCase();
+
+        const filtered = states.filter(state =>
+          state.name.toLowerCase().includes(filter)
+        );
+
+        renderStates(filtered);
+      });
+    }
+
+    // =================== SEARCH ===================
+    // No results message
+    const noResults = document.createElement("p");
     noResults.textContent = "No states found.";
     noResults.style.textAlign = "center";
     noResults.style.display = "none";
@@ -97,50 +103,49 @@ if (exploreGrid) {
     noResults.style.fontWeight = "600";
     noResults.style.marginTop = "20px";
 
-    exploreGrid.parentNode.insertBefore(noResults, exploreGrid.nextSibling);
+    exploreGrid.parentNode.appendChild(noResults);
 
-    searchInput.addEventListener('input', () => {
+    searchInput?.addEventListener("input", () => {
       const filter = searchInput.value.toLowerCase();
 
       const filtered = states.filter(state =>
         state.name.toLowerCase().includes(filter)
       );
 
-      noResults.style.display = filtered.length === 0 ? 'block' : 'none';
-
+      noResults.style.display = filtered.length === 0 ? "block" : "none";
       renderStates(filtered);
     });
   }
-}
-
 
 // =================== STATE PAGE ===================
 const stateTitle = document.getElementById("stateTitle");
   const stateSidebar = document.getElementById("stateSidebar");
   const stateCardsGrid = document.getElementById("stateCardsGrid");
 
-  const params = new URLSearchParams(window.location.search);
-  const stateKey = params.get("state");
-
-  if (stateTitle && stateKey && DATA[stateKey]) {
+  if (stateTitle && stateKey && DATA?.[stateKey]) {
     const state = DATA[stateKey];
+
     document.title = `Neighborhood Navigator - ${state.name}`;
     stateTitle.textContent = state.name;
 
-
-  // --- Sidebar ---
-  if (stateSidebar) {
+    // Sidebar
+    if (stateSidebar) {
       stateSidebar.innerHTML = "";
+
       Object.keys(DATA).forEach(key => {
         const li = document.createElement("li");
         const a = document.createElement("a");
+
         a.href = `state.html?state=${key}`;
         a.textContent = DATA[key].name;
+
         if (key === stateKey) a.classList.add("active");
+
         li.appendChild(a);
         stateSidebar.appendChild(li);
       });
     }
+
 
   // --- Cities / Neighborhoods ---
 
@@ -152,7 +157,7 @@ const stateTitle = document.getElementById("stateTitle");
       }));
       createCards(stateCardsGrid, cities, city => city.href, city => city.name, city => city.img);
     }
-
+   
   // --- Breadcrumb ---
   const breadcrumb = document.getElementById("breadcrumbTrail");
     if (breadcrumb) {
@@ -164,23 +169,46 @@ const stateTitle = document.getElementById("stateTitle");
 
 // =================== CITY PAGE ===================
 const cityTitle = document.getElementById("cityTitle");
-  const cityKey = params.get("city");
 
-  if (cityTitle && stateKey && cityKey && DATA[stateKey]?.cities[cityKey]) {
+  if (cityTitle && stateKey && cityKey && DATA?.[stateKey]?.cities?.[cityKey]) {
     const city = DATA[stateKey].cities[cityKey];
-    const formattedCity = city.name;
-    document.title = `Neighborhood Navigator - ${formattedCity}`;
-    cityTitle.textContent = formattedCity;
+
+    document.title = `Neighborhood Navigator - ${city.name}`;
+    cityTitle.textContent = city.name;
 
     const categoryGrid = document.getElementById("categoryGrid");
+
     if (categoryGrid) {
-      const categories = Object.keys(city.categories || {});
-      createCards(
-        categoryGrid,
-        categories,
-        key => `category.html?state=${stateKey}&city=${cityKey}&category=${key}`,
-        key => city.categories[key].label || key
-      );
+      categoryGrid.innerHTML = "";
+
+      Object.entries(city.categories || {}).forEach(([catKey, category]) => {
+
+        const section = document.createElement("div");
+        section.className = "category-section";
+
+        const title = document.createElement("h2");
+        title.textContent = category.label;
+        section.appendChild(title);
+
+        const subGrid = document.createElement("div");
+        subGrid.className = "subcategory-grid";
+
+        const subcategories = Object.entries(category.subcategories || {}).map(([subKey, sub]) => ({
+          key: subKey,
+          label: sub.label,
+          categoryKey: catKey
+        }));
+
+        createCards(
+          subGrid,
+          subcategories,
+          item => `subcategory.html?state=${stateKey}&city=${cityKey}&category=${item.categoryKey}&subcategory=${encodeURIComponent(item.key)}`,
+          item => item.label
+        );
+
+        section.appendChild(subGrid);
+        categoryGrid.appendChild(section);
+      });
     }
 
 
@@ -190,40 +218,7 @@ const cityTitle = document.getElementById("cityTitle");
       cityBreadcrumb.innerHTML = `
         <a href="explore.html">Explore</a> &gt;
         <a href="state.html?state=${stateKey}">${DATA[stateKey].name}</a> &gt; 
-        <span>${formattedCity}</span>
-      `;
-    }
-  }
-
-
-// =================== CATEGORY PAGE ===================
-const categoryTitleEl = document.getElementById("categoryTitle");
-  const categoryKey = params.get("category");
-
-  if (categoryTitleEl && stateKey && cityKey && categoryKey && DATA[stateKey]?.cities[cityKey]?.categories[categoryKey]) {
-    const category = DATA[stateKey].cities[cityKey].categories[categoryKey];
-    categoryTitleEl.textContent = `${category.label} in ${DATA[stateKey].cities[cityKey].name}`;
-
-    const subGrid = document.getElementById("categoryGrid");
-    if (subGrid) {
-      const subcategories = Object.entries(category.subcategories || {});
-      createCards(
-        subGrid,
-        subcategories,
-        ([key]) => `subcategory.html?state=${stateKey}&city=${cityKey}&category=${categoryKey}&subcategory=${encodeURIComponent(key)}`,
-        ([key, value]) => value.label || key
-      );
-    }
-
-  
-  // =================== Breadcrumb ===================
-  const categoryBreadcrumb = document.getElementById("categoryBreadcrumb");
-    if (categoryBreadcrumb) {
-      categoryBreadcrumb.innerHTML = `
-        <a href="explore.html">Explore</a> &gt;
-        <a href="state.html?state=${stateKey}">${DATA[stateKey].name}</a> &gt;
-        <a href="city.html?state=${stateKey}&city=${cityKey}">${DATA[stateKey].cities[cityKey].name}</a> &gt;
-        <span>${category.label}</span>
+        <span>${city.name}</span>
       `;
     }
   }
@@ -231,43 +226,70 @@ const categoryTitleEl = document.getElementById("categoryTitle");
 
   // =================== SUBCATEGORY PAGE ===================
 const subcategoryTitleEl = document.getElementById("subcategoryTitle");
-  const subcategoryKey = params.get("subcategory");
 
   if (
     subcategoryTitleEl &&
-    stateKey && cityKey && categoryKey && subcategoryKey &&
-    DATA[stateKey]?.cities[cityKey]?.categories[categoryKey]?.subcategories[subcategoryKey]
+    stateKey &&
+    cityKey &&
+    categoryKey &&
+    subcategoryKey &&
+    DATA?.[stateKey]?.cities?.[cityKey]?.categories?.[categoryKey]?.subcategories?.[subcategoryKey]
   ) {
-    const subcategoryObj = DATA[stateKey].cities[cityKey].categories[categoryKey].subcategories[subcategoryKey];
-    const items = subcategoryObj.items || [];
+    const subcategory =
+      DATA[stateKey].cities[cityKey].categories[categoryKey].subcategories[subcategoryKey];
 
-    subcategoryTitleEl.textContent = `${subcategoryObj.label} in ${DATA[stateKey].cities[cityKey].name}`;
+      // split intro vs normal items
+    const allItems = subcategory.items || []; // this defines all items from data js
 
-  const content = document.getElementById("subcategoryContent");
+    const introItems = allItems.filter(i => i.type === "intro");
+    const normalItems = allItems.filter(i => i.type !== "intro");
 
-  if (content) {
-    if (items.length) {
-      content.innerHTML = items.map(place => `
+    subcategoryTitleEl.textContent =
+      `${subcategory.label} in ${DATA[stateKey].cities[cityKey].name}`;
+
+    const content = document.getElementById("subcategoryContent");
+
+    if (content) {
+      content.innerHTML = "";
+
+    // =================== INTRO SECTION ===================
+    if (introItems.length > 0) {
+      const introSection = document.createElement("div");
+      introSection.className = "intro-section";
+
+      introItems.forEach(item => {
+        const introCard = document.createElement("div");
+        introCard.className = "intro-card";
+
+        introCard.innerHTML = `
+          <h2>${item.name}</h2>
+          <p>${item.description || ""}</p>
+        `;
+
+        introSection.appendChild(introCard);
+      });
+
+      content.appendChild(introSection);
+    }
+
+    // =================== NORMAL CARDS ===================
+    if (normalItems.length === 0) {
+      content.innerHTML += "<p>No items found.</p>";
+    } else {
+      content.innerHTML += normalItems.map(place => `
         <div class="detail-card">
-          <img src="${place.img || 'Images/default.jpg'}" alt="${place.name}">
+          <img src="${place.img || "Images/default.jpg"}" alt="${place.name}">
           
-          <h3>${place.name}</h3>
-          
-          ${place.description ? `<p>${place.description}</p>` : ""}
-          
-          ${place.address ? `<p><strong>Address:</strong> ${place.address}</p>` : ""}
-          
-          ${place.link && place.link !== "#" 
-            ? `<a href="${place.link}" target="_blank">Visit Website</a>` 
-            : ""
-          }
+          <div class="detail-info">
+            <h3>${place.name}</h3>
+            ${place.description ? `<p>${place.description}</p>` : ""}
+            ${place.address ? `<p><strong>Address:</strong> ${place.address}</p>` : ""}
+            ${place.link && place.link !== "#" ? `<a href="${place.link}" target="_blank">Visit Website</a>` : ""}
+          </div>
         </div>
       `).join("");
-    } else {
-      content.innerHTML = `<p>No details available for ${subcategoryObj.label}.</p>`;
     }
   }
-
 
 
   // Breadcrumb
@@ -276,12 +298,14 @@ const subcategoryTitleEl = document.getElementById("subcategoryTitle");
       subBreadcrumb.innerHTML = `
         <a href="explore.html">Explore</a> &gt;
         <a href="state.html?state=${stateKey}">${DATA[stateKey].name}</a> &gt;
-        <a href="city.html?state=${stateKey}&city=${cityKey}">${DATA[stateKey].cities[cityKey].name}</a> &gt;
-        <a href="category.html?state=${stateKey}&city=${cityKey}&category=${categoryKey}">${categoryLabels[categoryKey] || categoryKey}</a> &gt;
-        <span>${subcategoryKey}</span>
+        <a href="city.html?state=${stateKey}&city=${cityKey}">
+          ${DATA[stateKey].cities[cityKey].name}
+        </a> &gt;
+        <span>${subcategory.label}</span>
       `;
     }
   }
+});
 
 // =================== Local Insights Page ===================
 
@@ -352,5 +376,3 @@ const subcategoryTitleEl = document.getElementById("subcategoryTitle");
     });
 
 })();
-
-});
