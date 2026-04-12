@@ -24,16 +24,27 @@
         </ul>
     </nav>
 
-<main class="explore-page">
+<main class="city-container">
+
   <div class="frosted-container">
     
-    <nav id="cityBreadcrumb"></nav>
+    <!-- Breadcrumb -->
+    <nav id="cityBreadcrumb" class="breadcrumb"></nav>
 
-    <h1 id="cityTitle">City Name</h1>
+    <!-- City Header -->
+    <section class="city-header">
+      <h1 id="cityTitle">City Name</h1>
+      <p class="city-subtitle">Explore key information and categories for this city.</p>
+    </section>
 
-    <div class="states-grid" id="categoryGrid"></div>
+    <!-- Categories Grid (UNCHANGED ID) -->
+    <section>
+      <h2 class="section-title">Explore Categories</h2>
+      <div class="states-grid" id="categoryGrid"></div>
+    </section>
 
   </div>
+
 </main>
 
 <script src="data.js"></script> 

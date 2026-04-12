@@ -406,26 +406,55 @@ states-grid::-webkit-scrollbar {
 
 /* ================= City / State Cards ================= */
 /* IMAGE */
+.state-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 12px;
+  border-radius: 15px;
+  text-decoration: none;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  color: white;
+  transition: all 0.3s ease;
+  text-align: center;
+
+  overflow: hidden; /* keeps image corners clean */
+}
+
+/* IMAGE */
 .state-card img {
   width: 100%;
-  height: 120px;
+  height: 140px; /* 🔥 slightly bigger for better visuals */
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
 }
 
 /* TITLE */
 .state-card span {
-  padding: 10px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   color: white;
-  text-align: center;
+  padding: 5px 0;
 }
 
+/* HOVER EFFECT */
 .state-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transform: translateY(-6px) scale(1.02);
+  background: rgba(160,166,74,0.3);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* IMAGE ZOOM ON HOVER (🔥 subtle but impressive) */
+.state-card:hover img {
+  transform: scale(1.05);
 }
 
 
