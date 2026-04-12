@@ -265,46 +265,64 @@ body {
 /* ================= State Cards ================= */
 .state-card {
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   justify-content: flex-start;
-  padding: 15px 12px;
-  background: rgba(160, 166, 74, 0.2); /* soft frosted effect */
-  border-radius: 12px;
+
+  padding: 12px;
+  border-radius: 15px;
   text-decoration: none;
-  font-size: 0.95rem;
+
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  color: white;
+  text-align: center;
+  overflow: hidden;
+
+  /* IMPORTANT: ensures cards are always visible */
+  opacity: 1;
+  transform: none;
+
+  transition: all 0.3s ease;
+}
+
+ 
+/* IMAGE */
+.state-card img,
+.detail-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 14px;
+}
+
+/* TITLE */
+.state-card span {
+  font-size: 1rem;
   font-weight: 600;
   color: white;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(160,166,74,0.3);
-  text-align: center;
-
-  /* Start hidden for animation */
-  opacity: 0;
-  transform: translateY(20px);
-
+  padding: 5px 0;
 }
 
+/* HOVER EFFECT */
 .state-card:hover {
-  background: #a0a64a;
-  color: white;
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transform: translateY(-6px) scale(1.02);
+  background: rgba(160,166,74,0.3);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-/* ================= Card Animation ================= */
-@keyframes fadeInCard {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
+/* IMAGE ZOOM ON HOVER */
+.state-card:hover {
+  transform: translateY(-8px);
+  background: rgba(160,166,74,0.25);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
 
 /* ================= State Page Container ================= */
 .state-frosted-container {
@@ -382,20 +400,26 @@ body {
   color: white;
 }
 
-/* ================= City Cards Grid ================= */
-.states-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  flex: 1; /* takes remaining horizontal space */
-  
-  overflow-y: auto;   /* 🔥 THIS enables scrolling */
-  padding-right: 10px;
-
-  scroll-behavior: smooth;
+/* ================= CATEGORY GROUPING ================= */
+.category-section {
+  margin-bottom: 30px;
 }
 
-states-grid::-webkit-scrollbar {
+.category-section h2 {
+  color: #a0a64a;
+  margin-bottom: 10px;
+}
+
+.subcategory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+
+
+/* ================= City Cards Grid ================= */
+.states-grid::-webkit-scrollbar {
   width: 6px;
 }
 
@@ -404,82 +428,107 @@ states-grid::-webkit-scrollbar {
   border-radius: 3px;
 }
 
-/* ================= City / State Cards ================= */
-/* IMAGE */
-.state-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-
-  padding: 12px;
-  border-radius: 15px;
-  text-decoration: none;
-
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-
-  color: white;
-  transition: all 0.3s ease;
-  text-align: center;
-
-  overflow: hidden; /* keeps image corners clean */
-}
-
-/* IMAGE */
-.state-card img {
-  width: 100%;
-  height: 140px; /* 🔥 slightly bigger for better visuals */
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease;
-}
-
-/* TITLE */
-.state-card span {
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
-  padding: 5px 0;
-}
-
-/* HOVER EFFECT */
-.state-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  background: rgba(160,166,74,0.3);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-/* IMAGE ZOOM ON HOVER (🔥 subtle but impressive) */
-.state-card:hover img {
-  transform: scale(1.05);
+/* ================= CATEGORY and EXPLORE background generic css ================= */
+.explore-page,
+.city-page {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 
-/* ================= subcategory cards ================= */
+
+
+/* ================= subcategory detail cards ================= */
 .details-list {
-  display: grid;
+   display: flex;
+  flex-direction: column;
   gap: 15px;
 }
 
 .detail-card {
-  background: rgba(255,255,255,0.1);
-  padding: 15px;
-  border-radius: 10px;
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  max-width: 240px;
+
+  border-radius: 16px;
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  width: 100%;
+  max-width: 700px;
+
+  margin: 0 auto;
+
+  color: white;
 }
 
+
 .detail-card h3 {
-  margin-bottom: 8px;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.detail-card p {
+  margin: 4px 0;
+  opacity: 0.85;
+  line-height: 1.4;
 }
 
 .detail-card a {
+  margin-top: 6px;
+  display: inline-block;
   color: #a0a64a;
   text-decoration: underline;
 }
 
+.detail-card img {
+  width: 100px;
+  height: 100px;
+
+  object-fit: cover;
+  object-position: center;
+
+  border-radius: 12px;
+
+  flex-shrink: 0;
+
+  text-align: left;
+}
+
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  text-align: left; 
+}
+
+/* ================= subcategory intro css ================= */
+
+.intro-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.intro-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.intro-card h2 {
+  margin-bottom: 8px;
+  color: #a0a64a;
+}
 /* ================= Fade-in Animation ================= */
 @keyframes fadeInCard {
   0% {
