@@ -24,18 +24,33 @@
         </ul>
     </nav>
 
-   <main>
+   <main class="insights-page">
         <section id="community-tips">
             <h2>Things I wish I Knew Before Moving</h2>
+            <p class="page-intro">
+            Community-powered insights from locals sharing real experiences about living here.
+            </p>
 
-            <div class="form-group">
-                <label for="userTip">Share your Experience:</label>
-                <textarea
-                    id="userTip"
-                    rows="4"
-                    placeholder="Example: Traffic on 91 starts building around 3:00 PM on weekdays..."
-                    ></textarea>
+            <div class="info-box">
+            <h3>How this works</h3>
+            <ul>
+                <li>💬 Share real experiences about living here</li>
+                <li>⬆️ Upvote tips that are helpful</li>
+                <li>🔍 Filter by category (Traffic, Schools, etc.)</li>
+                <li>📌 Top-voted tips rise to the top automatically</li>
+            </ul>
             </div>
+
+            <form id="tipForm">
+
+                <div class="form-group">
+                    <label for="userTip">Share your Experience:</label>
+                    <textarea
+                        id="userTip"
+                        rows="4"
+                        placeholder="Example: Traffic on 91 starts building around 3:00 PM on weekdays..."
+                        ></textarea>
+                </div>
 
                     <label for="tipCategory">Category</label>
                     <select id="tipCategory">
@@ -44,7 +59,7 @@
                         <option value="schools">Schools</option>
                         <option value="Healthcare">Healthcare</option>
                         <option value="community">Community</option>
-                    </select><br><br>
+                    </select>
 
                   <button type="submit">Submit Your Tip</button>
             </form>
