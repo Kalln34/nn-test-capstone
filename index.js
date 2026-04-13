@@ -1,311 +1,167 @@
 // =================== Helper Functions ===================
 function capitalize(str) {
-  if (!str) return "";
+  if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function createCards(container, items, getHref, getTitle, getImg) {
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  if (!items || items.length === 0) {
-    container.innerHTML = "<p style='color:white'>No results found.</p>";
-    return;
-  }
-
-  items.forEach(item => {
-    const card = document.createElement("a");
-    card.className = "state-card";
-    card.href = getHref(item);
-
-    if (getImg) {
-      const img = document.createElement("img");
-      img.src = getImg(item);
-      img.alt = getTitle(item);
-      card.appendChild(img);
-    }
-
-    const title = document.createElement("span");
-    title.textContent = getTitle(item);
-    card.appendChild(title);
-
-    container.appendChild(card);
+function animateCards(cards) {
+  cards.forEach((card, index) => {
+    card.style.display = "flex";
+    card.style.animation = `fadeInCard 0.5s forwards`;
+    card.style.animationDelay = `${index * 0.1}s`;
   });
 }
 
-// =================== CATEGORY LABELS ===================
-const categoryLabels = {
-  education: "Education",
-  healthcare: "Healthcare",
-  publictransportation: "Public Transportation",
-  employment: "Employment",
-  government: "Government Resources",
-  community: "Community Resources"
-};
-
-
-// =================== MAIN SCRIPT ===================
-document.addEventListener("DOMContentLoaded", () => {
-  const params = new URLSearchParams(window.location.search);
-
-  const stateKey = params.get("state");
-  const cityKey = params.get("city");
-  const categoryKey = params.get("category");
-  const subcategoryKey = params.get("subcategory");
-
-
-
 // =================== EXPLORE PAGE ===================
-const exploreGrid = document.querySelector(".states-grid");
-  const searchInput = document.getElementById("stateSearch");
+if (document.getElementById('stateSearch')) {
+  const searchInput = document.getElementById('stateSearch');
+  const cards = document.querySelectorAll('.state-card');
+  const grid = document.querySelector('.states-grid');
 
-  let states = [];
+  // "No results" message
+  const noResults = document.createElement('p');
+  noResults.textContent = "No states found.";
+  noResults.style.textAlign = "center";
+  noResults.style.display = "none";
+  noResults.style.color = "#a0a64a";
+  noResults.style.fontWeight = "600";
+  noResults.style.marginTop = "20px";
 
-  if (exploreGrid && typeof DATA !== "undefined") {
-    states = Object.keys(DATA).map(key => ({
-      key,
-      name: DATA[key].name,
-      img: DATA[key].img
-    }));
+  grid.parentNode.insertBefore(noResults, grid.nextSibling);
 
-    function renderStates(list) {
-      createCards(
-        exploreGrid,
-        list,
-        s => `state.html?state=${s.key}`,
-        s => s.name,
-        s => s.img
-      );
-    }
+  function filterStates() {
+    const filter = searchInput.value.toLowerCase();
+    let anyVisible = false;
+    const visibleCards = [];
 
-    renderStates(states);
-
-    if (searchInput) {
-      searchInput.addEventListener("input", () => {
-        const filter = searchInput.value.toLowerCase();
-
-        const filtered = states.filter(state =>
-          state.name.toLowerCase().includes(filter)
-        );
-
-        renderStates(filtered);
-      });
-    }
-
-    // =================== SEARCH ===================
-    // No results message
-    const noResults = document.createElement("p");
-    noResults.textContent = "No states found.";
-    noResults.style.textAlign = "center";
-    noResults.style.display = "none";
-    noResults.style.color = "#a0a64a";
-    noResults.style.fontWeight = "600";
-    noResults.style.marginTop = "20px";
-
-    exploreGrid.parentNode.appendChild(noResults);
-
-    searchInput?.addEventListener("input", () => {
-      const filter = searchInput.value.toLowerCase();
-
-      const filtered = states.filter(state =>
-        state.name.toLowerCase().includes(filter)
-      );
-
-      noResults.style.display = filtered.length === 0 ? "block" : "none";
-      renderStates(filtered);
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(filter)) {
+        card.style.display = "flex";
+        visibleCards.push(card);
+        anyVisible = true;
+      } else {
+        card.style.display = "none";
+        card.style.animation = ""; // reset
+      }
     });
+
+    animateCards(visibleCards);
+    noResults.style.display = anyVisible ? 'none' : 'block';
   }
+
+  // Animate all cards on page load
+  animateCards(Array.from(cards));
+
+  // Filter on input
+  searchInput.addEventListener('input', filterStates);
+}
 
 // =================== STATE PAGE ===================
-const stateTitle = document.getElementById("stateTitle");
-  const stateSidebar = document.getElementById("stateSidebar");
-  const stateCardsGrid = document.getElementById("stateCardsGrid");
+document.addEventListener("DOMContentLoaded", () => {
+  // --- Get selected state from URL ---
+  const params = new URLSearchParams(window.location.search);
+  const stateName = params.get("state") || "Explore";
 
-  if (stateTitle && stateKey && DATA?.[stateKey]) {
-    const state = DATA[stateKey];
+  // --- Update title and heading ---
+  document.title = `Neighborhood Navigator - ${capitalize(stateName)}`;
+  const heading = document.getElementById("stateTitle");
+  if (heading) heading.textContent = capitalize(stateName);
 
-    document.title = `Neighborhood Navigator - ${state.name}`;
-    stateTitle.textContent = state.name;
+  // --- Sidebar ---
+  const states = [
+    "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida",
+    "Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine",
+    "Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska",
+    "Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota",
+    "Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota",
+    "Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"
+  ];
 
-    // Sidebar
-    if (stateSidebar) {
-      stateSidebar.innerHTML = "";
+  const sidebar = document.getElementById("stateSidebar");
+  sidebar.innerHTML = ""; // clear any existing items
 
-      Object.keys(DATA).forEach(key => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
+  states.forEach(state => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = `state.html?state=${state.toLowerCase()}`;
+    a.textContent = state;
 
-        a.href = `state.html?state=${key}`;
-        a.textContent = DATA[key].name;
+    if (state.toLowerCase() === stateName.toLowerCase()) a.classList.add("active");
 
-        if (key === stateKey) a.classList.add("active");
-
-        li.appendChild(a);
-        stateSidebar.appendChild(li);
-      });
-    }
-
+    li.appendChild(a);
+    sidebar.appendChild(li);
+  });
 
   // --- Cities / Neighborhoods ---
+  const stateCities = {
+    connecticut: [
+      { name: "Hartford", img: "Images/hartfordct.jpg" },
+      { name: "New Haven", img: "Images/newhavenct.png" },
+      { name: "Stamford", img: "Images/stamfordct.png" },
+      { name: "Danbury", img: "Images/danburyct.png" },
+      { name: "Norwalk", img: "Images/norwalkct.png" },
+      { name: "Bridgeport", img: "Images/bridgeportct.png" },
+      { name: "New Britain", img: "Images/newbritainct.png" },
+      { name: "New London", img: "Images/newlondonct.png" }
+    ],
+    california: [
+      { name: "Los Angeles", img: "Images/cities/losangeles.jpg" },
+      { name: "San Francisco", img: "Images/cities/sanfrancisco.jpg" },
+      { name: "San Diego", img: "Images/cities/sandiego.jpg" },
+      { name: "Sacramento", img: "Images/cities/sacramento.jpg" },
+      { name: "San Jose", img: "Images/cities/sanjose.jpg" }
+    ]
+    // add other states here
+  };
 
-  if (stateCardsGrid) {
-      const cities = Object.keys(state.cities).map(cityKey => ({
-        name: state.cities[cityKey].name,
-        img: state.cities[cityKey].img,
-        href: `city.html?state=${stateKey}&city=${cityKey}`
-      }));
-      createCards(stateCardsGrid, cities, city => city.href, city => city.name, city => city.img);
-    }
-   
+  const cities = stateCities[stateName.toLowerCase()] || [
+    { name: "City 1", img: "Images/cities/default.jpg" },
+    { name: "City 2", img: "Images/cities/default.jpg" },
+    { name: "City 3", img: "Images/cities/default.jpg" },
+    { name: "City 4", img: "Images/cities/default.jpg" },
+    { name: "City 5", img: "Images/cities/default.jpg" }
+  ];
+  const grid = document.getElementById("stateCardsGrid");
+
+
+  // Display cities
+  grid.innerHTML = "";
+  cities.forEach((city, i) => {
+    const card = document.createElement("a");
+    card.href = `city.html?city=${city.name.toLowerCase().replace(/\s+/g,'')}`;
+    card.className = "state-card";
+
+    // Add city image
+    const img = document.createElement("img");
+    img.src = city.img;
+    img.alt = city.name;
+    card.appendChild(img);
+
+    // Add city name
+    const name = document.createElement("span");
+    name.textContent = city.name;
+    card.appendChild(name);
+
+
+    // Fade-in animation
+    card.style.animation = `fadeInCard 0.5s forwards`;
+    card.style.animationDelay = `${i * 0.1}s`;
+
+    grid.appendChild(card);
+  });
+
   // --- Breadcrumb ---
   const breadcrumb = document.getElementById("breadcrumbTrail");
-    if (breadcrumb) {
-      breadcrumb.innerHTML = `<a href="explore.html" style="color:white;text-decoration:underline;">Explore</a> &gt; <span>${state.name}</span>`;
-    }
-  }
-
-
-
-// =================== CITY PAGE ===================
-const cityTitle = document.getElementById("cityTitle");
-
-  if (cityTitle && stateKey && cityKey && DATA?.[stateKey]?.cities?.[cityKey]) {
-    const city = DATA[stateKey].cities[cityKey];
-
-    document.title = `Neighborhood Navigator - ${city.name}`;
-    cityTitle.textContent = city.name;
-
-    const categoryGrid = document.getElementById("categoryGrid");
-
-    if (categoryGrid) {
-      categoryGrid.innerHTML = "";
-
-      Object.entries(city.categories || {}).forEach(([catKey, category]) => {
-
-        const section = document.createElement("div");
-        section.className = "category-section";
-
-        const title = document.createElement("h2");
-        title.textContent = category.label;
-        section.appendChild(title);
-
-        const subGrid = document.createElement("div");
-        subGrid.className = "subcategory-grid";
-
-        const subcategories = Object.entries(category.subcategories || {}).map(([subKey, sub]) => ({
-          key: subKey,
-          label: sub.label,
-          categoryKey: catKey
-        }));
-
-        createCards(
-          subGrid,
-          subcategories,
-          item => `subcategory.html?state=${stateKey}&city=${cityKey}&category=${item.categoryKey}&subcategory=${encodeURIComponent(item.key)}`,
-          item => item.label
-        );
-
-        section.appendChild(subGrid);
-        categoryGrid.appendChild(section);
-      });
-    }
-
-
-// --- Breadcrumb ---
-    const cityBreadcrumb = document.getElementById("cityBreadcrumb");
-    if (cityBreadcrumb) {
-      cityBreadcrumb.innerHTML = `
-        <a href="explore.html">Explore</a> &gt;
-        <a href="state.html?state=${stateKey}">${DATA[stateKey].name}</a> &gt; 
-        <span>${city.name}</span>
-      `;
-    }
-  }
-
-
-  // =================== SUBCATEGORY PAGE ===================
-const subcategoryTitleEl = document.getElementById("subcategoryTitle");
-
-  if (
-    subcategoryTitleEl &&
-    stateKey &&
-    cityKey &&
-    categoryKey &&
-    subcategoryKey &&
-    DATA?.[stateKey]?.cities?.[cityKey]?.categories?.[categoryKey]?.subcategories?.[subcategoryKey]
-  ) {
-    const subcategory =
-      DATA[stateKey].cities[cityKey].categories[categoryKey].subcategories[subcategoryKey];
-
-      // split intro vs normal items
-    const allItems = subcategory.items || []; // this defines all items from data js
-
-    const introItems = allItems.filter(i => i.type === "intro");
-    const normalItems = allItems.filter(i => i.type !== "intro");
-
-    subcategoryTitleEl.textContent =
-      `${subcategory.label} in ${DATA[stateKey].cities[cityKey].name}`;
-
-    const content = document.getElementById("subcategoryContent");
-
-    if (content) {
-      content.innerHTML = "";
-
-    // =================== INTRO SECTION ===================
-    if (introItems.length > 0) {
-      const introSection = document.createElement("div");
-      introSection.className = "intro-section";
-
-      introItems.forEach(item => {
-        const introCard = document.createElement("div");
-        introCard.className = "intro-card";
-
-        introCard.innerHTML = `
-          <h2>${item.name}</h2>
-          <p>${item.description || ""}</p>
-        `;
-
-        introSection.appendChild(introCard);
-      });
-
-      content.appendChild(introSection);
-    }
-
-    // =================== NORMAL CARDS ===================
-    if (normalItems.length === 0) {
-      content.innerHTML += "<p>No items found.</p>";
-    } else {
-      content.innerHTML += normalItems.map(place => `
-        <div class="detail-card">
-          <img src="${place.img || "Images/default.jpg"}" alt="${place.name}">
-          
-          <div class="detail-info">
-            <h3>${place.name}</h3>
-            ${place.description ? `<p>${place.description}</p>` : ""}
-            ${place.address ? `<p><strong>Address:</strong> ${place.address}</p>` : ""}
-            ${place.link && place.link !== "#" ? `<a href="${place.link}" target="_blank">Visit Website</a>` : ""}
-          </div>
-        </div>
-      `).join("");
-    }
-  }
-
-
-  // Breadcrumb
-  const subBreadcrumb = document.getElementById("subcategoryBreadcrumb");
-    if (subBreadcrumb) {
-      subBreadcrumb.innerHTML = `
-        <a href="explore.html">Explore</a> &gt;
-        <a href="state.html?state=${stateKey}">${DATA[stateKey].name}</a> &gt;
-        <a href="city.html?state=${stateKey}&city=${cityKey}">
-          ${DATA[stateKey].cities[cityKey].name}
-        </a> &gt;
-        <span>${subcategory.label}</span>
-      `;
-    }
+  if (breadcrumb) {
+    breadcrumb.innerHTML = `<a href="explore.html" style="color:white;text-decoration:underline;">Explore</a> &gt; <span>${capitalize(stateName)}</span>`;
   }
 });
+
+// Capitalize helper
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 // =================== Local Insights Page ===================
 
@@ -320,27 +176,69 @@ const subcategoryTitleEl = document.getElementById("subcategoryTitle");
   const filterCategory = document.getElementById("filterCategory");
 
   // Load saved tips from localStorage
-  const savedTips = JSON.parse(localStorage.getItem("communityTips") || "[]");
+  let savedTips = JSON.parse(localStorage.getItem("communityTips") || "[]");
+
+  // Ensure old data still works (migration layer)
+  savedTips = savedTips.map(t => ({
+    id: t.id || Date.now() + Math.random(),
+    text: t.text || "",
+    category: (t.category || "general").toLowerCase(),
+    votes: t.votes || 0,
+    createdAt: t.createdAt || Date.now()
+  }));
+
+  function save() {
+    localStorage.setItem("communityTips", JSON.stringify(savedTips));
+  }
 
   function renderTips(filter = "All") {
     tipsList.innerHTML = "";
-    savedTips.forEach((tip, index) => {
-      if (filter !== "All" && tip.category !== filter) return;
 
+    let filtered = savedTips;
+
+    if (filter !== "All") {
+      filtered = savedTips.filter(t => t.category === filter.toLowerCase());
+    }
+
+    // Reddit-style ranking (MOST IMPORTANT UPGRADE)
+    filtered.sort((a, b) => b.votes - a.votes);
+
+    filtered.forEach(tip => {
       const li = document.createElement("li");
-      li.className = "tip-card";
+    li.className = "tip-card";
+    li.dataset.id = tip.id; 
 
-      li.innerHTML = `
-        <strong>${tip.category}</strong><br>
+    li.innerHTML = `
+      <div class="vote-column">
+        <button type="button" onclick="window.voteTip('${tip.id}', 1)">▲</button>
+        <div>${tip.votes}</div>
+        <button type="button" onclick="window.voteTip('${tip.id}', -1)">▼</button>
+      </div>
+
+      <div class="tip-content">
         <p>${tip.text}</p>
-        <button class="delete-btn" data-index="${index}">Delete</button>
-      `;
+      </div>
+
+      <span class="tag ${tip.category}">
+        ${tip.category}
+      </span>
+    `;
+
       tipsList.appendChild(li);
     });
   }
 
-  // Initial render
-  renderTips();
+  // voting globally 
+  function vote(id, delta) {
+  const tip = savedTips.find(t => String(t.id) === String(id));
+  if (!tip) return;
+
+  tip.votes += delta;
+  save();
+  renderTips(filterCategory.value || "All");
+}
+
+  window.voteTip = vote;
 
   // Form submission
   tipForm.addEventListener("submit", function(event) {
@@ -352,27 +250,49 @@ const subcategoryTitleEl = document.getElementById("subcategoryTitle");
       alert("Please enter a tip before submitting");
       return;
     }
-    savedTips.push({ text: tipText, category });
-      localStorage.setItem("communityTips", JSON.stringify(savedTips));
-      renderTips(filterCategory?.value || "All");
-      userTipInput.value = "";
-      tipCategory.value = "general";
-      if (submitMessage) { submitMessage.style.display = "block"; setTimeout(() => { submitMessage.style.display = "none"; }, 2000); }
-    });
 
-  // Delete tip
-  tipsList.addEventListener("click", function(event) {
-    if (event.target.classList.contains("delete-btn")) {
-      const index = event.target.dataset.index;
-      savedTips.splice(index, 1);
-      localStorage.setItem("communityTips", JSON.stringify(savedTips));
-      renderTips(filterCategory?.value || "All");
+     const newTip = {
+      id: Date.now(),
+      text: tipText,
+      category,
+      votes: 0,
+      createdAt: Date.now()
+    };
+
+    savedTips = [...savedTips, newTip];
+    save();
+
+    renderTips(filterCategory.value || "All");
+
+    userTipInput.value = "";
+    tipCategory.value = "general";
+
+    if (submitMessage) {
+      submitMessage.style.display = "block";
+      setTimeout(() => {
+        submitMessage.style.display = "none";
+      }, 2000);
     }
   });
+
+  tipsList.addEventListener("click", function(event) {
+    if (event.target.classList.contains("delete-btn")) {
+      const id = event.target.closest(".tip-card").dataset.id;
+
+      savedTips = savedTips.filter(t => t.id != id);
+
+      save();
+      renderTips(filterCategory.value || "All");
+    }
+  });
+  
 
   // Filter tips
   filterCategory?.addEventListener("change", function() {
     renderTips(filterCategory.value);
     });
+
+    // INITIAL RENDER
+  renderTips();
 
 })();
