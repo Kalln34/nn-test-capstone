@@ -461,14 +461,14 @@ states-grid::-webkit-scrollbar {
 
 /* ================= local insights page ================= */
 
+
+
+/* Form + section layout */
 #community-tips {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background: rgba(160,166,74,0.15);
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  color: white;
 }
 
 #community-tips h2 {
@@ -477,32 +477,41 @@ states-grid::-webkit-scrollbar {
   color: #fff;
 }
 
-#community-tips form {
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
+
+/* Inputs + selects */
 #community-tips textarea,
-#community-tips select,
-#community-tips button {
+#community-tips select {
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.25);
+  color: white;
+  backdrop-filter: blur(8px);
   font-size: 1rem;
 }
 
+/* Button styling */
 #community-tips button {
+  padding: 10px;
+  border-radius: 10px;
   background-color: #a0a64a;
   color: white;
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
+  border: none;
 }
 
 #community-tips button:hover {
   background-color: #f4978e;
 }
+
 
 #tipsList {
   list-style: none;
@@ -522,6 +531,9 @@ states-grid::-webkit-scrollbar {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15);
 }
 
 .tip-card button.delete-btn {
@@ -543,6 +555,8 @@ states-grid::-webkit-scrollbar {
   padding: 8px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.2);
+   background: rgba(0,0,0,0.25);
+  color: white;
 }
 
 /* ================= Footer ================= */
